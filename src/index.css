@@ -94,10 +94,6 @@ a:visited {
   font-size: 14;
 }
 
-/* .prof-img {
-  max-width: 200px;
-} */
-
 .resume-wrap {
   width: 100%;
   margin: 0;
@@ -111,6 +107,6 @@ object {
 .repos {
   margin: 20px;
   display: grid;
-  grid-template-columns: 350px 350px 350px;
-  grid-template-rows: 160px 160px 160px;
+  grid-template-columns: 365px 365px 365px;
+  grid-template-rows: 100px 100px 100px 100px 100px;
 }
