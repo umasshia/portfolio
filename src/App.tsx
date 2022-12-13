@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import Navbar from "./components/Navbar";
+import Contact from "./pages/Contact";
 import Employment from "./pages/Employment";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
@@ -12,9 +13,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/employment" element={<Employment />}></Route>
-        <Route path="/projects" element={<Projects />}></Route>
-        <Route path="/resume" element={<Resume />}></Route>
+        <Route path="/employment.js" element={<Employment />}></Route>
+        <Route path="/projects.html" element={<Projects />}></Route>
+        <Route path="/contact.json" element={<Contact />}></Route>
+        <Route path="/resume.pdf" element={<Resume />}></Route>
       </Routes>
     </div>
   );

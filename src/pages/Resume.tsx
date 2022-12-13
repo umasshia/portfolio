@@ -3,12 +3,13 @@ const Resume = () => {
 
     return (
         <div className="resume-wrap">
-            <embed className="resume"
-                src={require('../Resume.pdf#toolbar=0')}
+            <iframe className="resume"
+                src={require("../Resume.pdf")}
                 width="80%"
                 height="100%"
+                title="resume"
             >
-            </embed>
+            </iframe>
         </div>
     );
 };

@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { AiOutlineRight, AiOutlineMail, AiOutlineGithub, AiOutlineDown, AiOutlineFile, AiOutlineFolder, AiOutlineFolderOpen, AiOutlineLinkedin } from "react-icons/ai";
-import { VscFiles } from "react-icons/vsc";
+import { AiOutlineRight, AiOutlineMail, AiOutlineFilePdf, AiOutlineGithub, AiOutlineDown, AiOutlineFolder, AiOutlineFolderOpen, AiOutlineLinkedin, AiOutlineHtml5 } from "react-icons/ai";
+import { HiOutlineDocumentDownload } from "react-icons/hi"
+import { VscFiles,VscJson } from "react-icons/vsc";
+import { SiJavascript } from "react-icons/si"
+import { FaJava } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -11,19 +14,22 @@ const Navbar = () => {
         children: 
         [
             {
-                name: 'general' 
+                name: 'general.java' 
             },
             {
                 name: 'more info',
                 children: [
                     {
-                        name: 'employment'
+                        name: 'employment.js'
                     },
                     {
-                        name: 'projects'
+                        name: 'projects.html'
                     },
                     {
-                        name: 'contact',
+                        name: 'contact.json',
+                    },
+                    {
+                        name: 'resume.pdf',
                     }
                 ]
             }
@@ -61,9 +67,12 @@ const Navbar = () => {
                     </div>
                 ) : (
                     <div className="file">
-                        <Link to={entry.name === 'general' ? `/` : `/${entry.name}`} >
+                        <Link to={entry.name === 'general.java' ? `/` : `/${entry.name}`} >
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <AiOutlineFile />
+                                {entry.name === 'general.java' ? (<FaJava />)
+                                    : entry.name === 'employment.js' ? (<SiJavascript />)
+                                    : entry.name === 'projects.html' ? (<AiOutlineHtml5 />)
+                                    : entry.name === 'contact.json' ? (<VscJson />) : (<AiOutlineFilePdf />)}
                             &nbsp;
                             {entry.name}
                         </Link>   
@@ -84,14 +93,17 @@ const Navbar = () => {
         <div className={navExpanded ? "navbar" : ""}>
             <div className="nav-btns">
                 <VscFiles className="nav-btn" onClick={() => setNavExpanded(!navExpanded)}/>
-                <a href="https://github.com/umasshia?tab=repositories">
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/umasshia?tab=repositories" title="Github">
                     <AiOutlineGithub className="nav-btn"/>
                 </a>
-                <a href = "https://linkedin.com/in/giorgisamushia">
-                    <AiOutlineLinkedin className="nav-btn"/>
+                <a target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/giorgisamushia" title="LinkedIn">
+                    <AiOutlineLinkedin className="nav-btn" />
                 </a>
-                <a href = "mailto:giorgisamu.gs@gmail.com">
+                <a target="_blank" rel="noopener noreferrer" href="mailto:giorgisamu.gs@gmail.com" title="Contact Me">
                     <AiOutlineMail className="nav-btn"/>
+                </a>
+                <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1P7PAJ7e0dyB7cP3ZBu6bq7HOc8PHyMv1/view?usp=share_link" title="Download My Resume" download>
+                    <HiOutlineDocumentDownload className="nav-btn"/>
                 </a>
             </div>
             {navExpanded ? (
