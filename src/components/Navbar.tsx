@@ -7,9 +7,7 @@ import { FaJava } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-
     const [navExpanded, setNavExpanded] = useState(false);
-
     const files = {
         children: 
         [
@@ -81,7 +79,7 @@ const Navbar = () => {
             {isExpanded && (
                 <div style={{paddingLeft: `${depth * 15}px`}}>
                     {entry.children?.map(entry => (
-                        <Entry entry={entry} depth={depth + 1} />
+                        <Entry key={entry.name} entry={entry} depth={depth + 1} />
                     ))}
                 </div>
             )}
@@ -109,7 +107,7 @@ const Navbar = () => {
             {navExpanded ? (
                 <div className="nav-sections">
                 {files.children.map((entry) => (
-                    <Entry entry={entry} depth={1} />
+                    <Entry key={entry.name} entry={entry} depth={1} />
                 ))}
                 </div>
             ) : (null)}
