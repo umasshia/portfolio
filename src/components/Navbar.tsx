@@ -65,7 +65,7 @@ const Navbar = () => {
                     </div>
                 ) : (
                     <div className="file">
-                        <Link to={entry.name === 'general.java' ? `/portfolio` : `/portfolio/${entry.name}`} >
+                        <Link to={entry.name === 'general.java' ? `/` : `/${entry.name}`} >
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 {entry.name === 'general.java' ? (<FaJava />)
                                     : entry.name === 'employment.js' ? (<SiJavascript />)
