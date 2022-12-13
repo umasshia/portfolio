@@ -100,7 +100,7 @@ const Navbar = () => {
                 <a target="_blank" rel="noopener noreferrer" href="mailto:giorgisamu.gs@gmail.com" title="Contact Me">
                     <AiOutlineMail className="nav-btn"/>
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1P7PAJ7e0dyB7cP3ZBu6bq7HOc8PHyMv1/view?usp=share_link" title="Download My Resume" download>
+                <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zEWd_3VHZTNonvaibEt44cCctmDtbN2m/view?usp=share_link" title="Download My Resume" download>
                     <HiOutlineDocumentDownload className="nav-btn"/>
                 </a>
             </div>
