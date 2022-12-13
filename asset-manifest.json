@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.7f87966f.css",
-    "main.js": "/portfolio/static/js/main.a2f6e305.js",
+    "main.css": "/portfolio/static/css/main.efdf6bb3.css",
+    "main.js": "/portfolio/static/js/main.7213a368.js",
     "react-syntax-highlighter/refractor-core-import.js": "/portfolio/static/js/react-syntax-highlighter/refractor-core-import.2df3ed55.chunk.js",
     "react-syntax-highlighter_languages_refractor_abap.js": "/portfolio/static/js/react-syntax-highlighter_languages_refractor_abap.80447c71.chunk.js",
     "react-syntax-highlighter_languages_refractor_actionscript.js": "/portfolio/static/js/react-syntax-highlighter_languages_refractor_actionscript.9dcb50e3.chunk.js",
@@ -156,17 +156,9 @@
     "react-syntax-highlighter_languages_refractor_yaml.js": "/portfolio/static/js/react-syntax-highlighter_languages_refractor_yaml.547e35b8.chunk.js",
     "static/js/787.9c74c3a3.chunk.js": "/portfolio/static/js/787.9c74c3a3.chunk.js",
     "static/media/Resume.pdf": "/portfolio/static/media/Resume.c28d8d74776c25f6e00b.pdf",
-    "static/media/twitter.jpg": "/portfolio/static/media/twitter.b925c6d743b5d5ca7dda.jpg",
-    "static/media/syscalls.jpg": "/portfolio/static/media/syscalls.af1f9b16345c69da5143.jpg",
-    "static/media/unidb.jpg": "/portfolio/static/media/unidb.6c01919fc82fe7ab61d5.jpg",
-    "static/media/tictactoe.jpg": "/portfolio/static/media/tictactoe.04c5d4e06fc4d64e1b8e.jpg",
-    "static/media/film-database.jpg": "/portfolio/static/media/film-database.45739c6f9ccc53387474.jpg",
-    "static/media/hadoop.jpg": "/portfolio/static/media/hadoop.42f6184f63d98e3812d0.jpg",
-    "static/media/portfolio.jpg": "/portfolio/static/media/portfolio.346776b7590d68973aea.jpg",
-    "static/media/guess.jpg": "/portfolio/static/media/guess.32b754cb9a905389a63f.jpg",
     "index.html": "/portfolio/index.html",
-    "main.7f87966f.css.map": "/portfolio/static/css/main.7f87966f.css.map",
-    "main.a2f6e305.js.map": "/portfolio/static/js/main.a2f6e305.js.map",
+    "main.efdf6bb3.css.map": "/portfolio/static/css/main.efdf6bb3.css.map",
+    "main.7213a368.js.map": "/portfolio/static/js/main.7213a368.js.map",
     "refractor-core-import.2df3ed55.chunk.js.map": "/portfolio/static/js/react-syntax-highlighter/refractor-core-import.2df3ed55.chunk.js.map",
     "react-syntax-highlighter_languages_refractor_abap.80447c71.chunk.js.map": "/portfolio/static/js/react-syntax-highlighter_languages_refractor_abap.80447c71.chunk.js.map",
     "react-syntax-highlighter_languages_refractor_actionscript.9dcb50e3.chunk.js.map": "/portfolio/static/js/react-syntax-highlighter_languages_refractor_actionscript.9dcb50e3.chunk.js.map",
@@ -322,7 +314,7 @@
     "787.9c74c3a3.chunk.js.map": "/portfolio/static/js/787.9c74c3a3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f87966f.css",
-    "static/js/main.a2f6e305.js"
+    "static/css/main.efdf6bb3.css",
+    "static/js/main.7213a368.js"
   ]
 }
