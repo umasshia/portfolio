@@ -9,9 +9,8 @@ body {
   color: white;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body > #root > div {
+  height: 100vh;
 }
 
 img {
@@ -30,13 +29,12 @@ a:visited {
 .main {
   display: flex;
   flex-direction: row;
-  width: 100vw;
+  width: 100%;
   gap: 10px;
-  height: 100vh;
+  height: 100%;
 }
 
 .navbar {
-  height: 100%;
   display: flex;
   flex-direction: row;
   font-size: 18px;
@@ -80,7 +78,6 @@ a:visited {
 }
 
 .home {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -95,13 +92,8 @@ a:visited {
 }
 
 .resume-wrap {
-  width: 100%;
-  margin: 0;
-}
-
-object {
-  width: 60%;
-  height: 85%;
+  width: 80%;
+  height: 80%;
 }
 
 .repos {
@@ -109,4 +101,31 @@ object {
   display: grid;
   grid-template-columns: 365px 365px 365px;
   grid-template-rows: 100px 100px 100px 100px 100px;
+}
+
+.tabs{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  color: grey;
+}
+
+.tab {
+  padding: 5px;
+  width: 170px;
+  cursor: pointer;
+}
+
+.close-tab{
+  display: inline-block
+}
+
+.disabled-tab {
+  display: inline-block;
+}
+
+.page-wrap {
+  width: 100%;
+  height: 100%;
 }
