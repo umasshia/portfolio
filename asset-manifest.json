@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.efdf6bb3.css",
-    "main.js": "/portfolio/static/js/main.4481564b.js",
+    "main.css": "/portfolio/static/css/main.089c5f26.css",
+    "main.js": "/portfolio/static/js/main.e0cfb49b.js",
     "react-syntax-highlighter/refractor-core-import.js": "/portfolio/static/js/react-syntax-highlighter/refractor-core-import.2df3ed55.chunk.js",
     "react-syntax-highlighter_languages_refractor_abap.js": "/portfolio/static/js/react-syntax-highlighter_languages_refractor_abap.80447c71.chunk.js",
     "react-syntax-highlighter_languages_refractor_actionscript.js": "/portfolio/static/js/react-syntax-highlighter_languages_refractor_actionscript.9dcb50e3.chunk.js",
@@ -157,8 +157,8 @@
     "static/js/787.9c74c3a3.chunk.js": "/portfolio/static/js/787.9c74c3a3.chunk.js",
     "static/media/Resume.pdf": "/portfolio/static/media/Resume.f565149f5f3f34825476.pdf",
     "index.html": "/portfolio/index.html",
-    "main.efdf6bb3.css.map": "/portfolio/static/css/main.efdf6bb3.css.map",
-    "main.4481564b.js.map": "/portfolio/static/js/main.4481564b.js.map",
+    "main.089c5f26.css.map": "/portfolio/static/css/main.089c5f26.css.map",
+    "main.e0cfb49b.js.map": "/portfolio/static/js/main.e0cfb49b.js.map",
     "refractor-core-import.2df3ed55.chunk.js.map": "/portfolio/static/js/react-syntax-highlighter/refractor-core-import.2df3ed55.chunk.js.map",
     "react-syntax-highlighter_languages_refractor_abap.80447c71.chunk.js.map": "/portfolio/static/js/react-syntax-highlighter_languages_refractor_abap.80447c71.chunk.js.map",
     "react-syntax-highlighter_languages_refractor_actionscript.9dcb50e3.chunk.js.map": "/portfolio/static/js/react-syntax-highlighter_languages_refractor_actionscript.9dcb50e3.chunk.js.map",
@@ -314,7 +314,7 @@
     "787.9c74c3a3.chunk.js.map": "/portfolio/static/js/787.9c74c3a3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.efdf6bb3.css",
-    "static/js/main.4481564b.js"
+    "static/css/main.089c5f26.css",
+    "static/js/main.e0cfb49b.js"
   ]
 }
