@@ -20,7 +20,7 @@ const files = {
                     name: 'more info',
                     children: [
                         {
-                            name: 'employment.cpp'
+                            name: 'experience.cpp'
                         },
                         {
                             name: 'projects.yaml'
@@ -52,7 +52,7 @@ function getFileIcon(fileName: string) {
     switch(fileName) {
     case 'general.java':
         return <FaJava />;
-    case 'employment.cpp':
+    case 'experience.cpp':
         return <SiCplusplus />;
     case 'projects.yaml':
         return <AiOutlineFileText />;

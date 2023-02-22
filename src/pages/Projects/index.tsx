@@ -27,12 +27,13 @@ function Projects() {
     
     return (
         <pre className='yml'>
+            {1 + `\t`}# Projects <br />
         {repos.map((repo, num) => (
             <>
-            {num * 4 + 1 + `\t`}name: {repo.name}<br />
-            {num * 4 + 2 + `\t   `}description: {repo.description}<br />
-            {num * 4 + 3 + `\t   `}link: <a href={repoUrl + repo.name}>{repoUrl + repo.name}</a><br />
-            {num * 3 + 4 }<br />
+            {num * 4 + 2 + `\t`}name: {repo.name}<br />
+            {num * 4 + 3 + `\t   `}description: {repo.description}<br />
+            {num * 4 + 4 + `\t   `}link: <a href={repoUrl + repo.name}>{repoUrl + repo.name}</a><br />
+            {num * 4 + 5 }<br />
             </>
         ))}
         </pre>

@@ -1,8 +1,8 @@
-import txt from "../docs/employment.txt"
+import txt from "../docs/experience.txt"
 import { railscast, CodeBlock } from "react-code-blocks";
 import { useFetchText } from "../../utils/FetchTxt";
 
-const Employment = () => {
+const Experience = () => {
     const text = useFetchText(txt);
     return (
         <div className="code">
@@ -16,4 +16,4 @@ const Employment = () => {
     );
 };
 
-export default Employment;
+export default Experience;
