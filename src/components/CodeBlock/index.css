@@ -1,0 +1,12 @@
+.code-block {
+    background-color: #282c34;
+    color: #fff;
+    padding: 1rem;
+    font-size: 1rem;
+    font-family: Consolas, 'Courier New', monospace;
+    overflow-x: auto;
+}
+
+.code-block code {
+    font-family: Consolas, 'Courier New', monospace;
+}

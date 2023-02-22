@@ -85,7 +85,7 @@ function Entry({ entry, depth }: EntryProps) {
             return (
                 <div className="file-icon">
                 {getFileIcon(entry.name)}
-                <Link to={entry.name === 'general.java' ? `/` : `/${entry.name}`} >
+                <Link to={`/${entry.name}`} >
                     <span className="entry-name">{entry.name}</span>
                 </Link>
                 </div>

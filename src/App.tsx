@@ -3,7 +3,8 @@ import Navbar from "./components/Navbar/index";
 import Tabs from "./components/Tabs/index";
 import Contact from "./pages/Contact";
 import Employment from "./pages/Employment";
-import Home from "./pages/Home";
+import General from "./pages/General";
+import Home from "./pages/Home/index";
 import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 
@@ -15,6 +16,7 @@ function App() {
         <Tabs />
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/general.java" element={<General />}></Route>
           <Route path="/employment.js" element={<Employment />}></Route>
           <Route path="/projects.html" element={<Projects />}></Route>
           <Route path="/contact.json" element={<Contact />}></Route>

@@ -19,14 +19,24 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .close-tab {
     font-size: 1rem;
-    color: gray;
+    color: #232323;
     cursor: pointer;
-    padding: 5px;
+    padding: 3px;
+}
+
+.tab:hover .close-tab{
+    color: gray;
+}
+
+.close-tab:hover {
+    color: white;
+    background-color: #363636;
+    border-radius: 20%;
 }
 
 .tab.selected {

@@ -1,0 +1,11 @@
+// hi, I'm Giorgi, an undergraduate software developer
+class AboutMe() {
+ 	const Name = "Giorgi Samushia";
+	const Date_of_Birth = "04/26/2001";
+	const University = "Manhattan College";
+	const Degree = "Bachelor of Science";
+	const Major = "Computer Science";
+	const Graduation_Month = "May 2023";
+	var Languages = { "C++", "Java", "Javascript", "TypeScript", "HTML", 
+					"PHP","CSS", "Python", "Shell", "Bash", "R", "AWK" };
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AiOutlineFilePdf, AiOutlineHtml5 } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineFilePdf, AiOutlineHtml5 } from "react-icons/ai";
 import { FaJava } from "react-icons/fa";
 import { SiJavascript } from "react-icons/si";
 import { VscJson } from "react-icons/vsc";
@@ -14,57 +14,63 @@ const TAB_ICONS: {[key: string]: JSX.Element} = {
 };
 
 const Tabs = () => {
-const navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation().pathname.slice(1)
 
-const [tabs, setTabs] = useState<string[]>(["general.java"]);
+    const [tabs, setTabs] = useState<string[]>([]);
 
-let selected = useLocation().pathname.substring(1);
-if (selected === "") selected = "general.java";
+    const [selected, setSelected] = useState<string>(location);
 
-useEffect(() => {
-    if (!tabs.includes(selected)) {
-    setTabs([...tabs, selected]);
+    
+    useEffect(() => {
+        console.log(location)
+        if (location !== "") {
+            if (!tabs.includes(location)) {
+                setTabs([...tabs, location]);
+            }
+        } 
+        setSelected(location);
+    }, [location, tabs]);
+
+    const handleTabClose = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, tab: string) => {
+        console.log(tabs)
+        const newTabs = tabs.filter((t) => t !== tab);
+        console.log(newTabs)
+        setTabs(newTabs);
+        if (newTabs.length === 0) {
+            navigate("/");
+        } else {
+            navigate(`/${newTabs[newTabs.length - 1]}`);
+        }
+        event.preventDefault();
+    };
+
+    function Tab({ tab }: { tab: string }) {
+        return (
+            <div
+            className={selected === tab ? "tab selected" : "tab"}
+            >
+            <Link className="tab-outline"to={`/${tab}`}>
+                <div className="tab-icon">
+                {TAB_ICONS[tab] || <AiOutlineFilePdf />}
+                </div>
+                <div className="tab-name">{tab}</div>
+                <div className="close-tab" onClick={(e) => handleTabClose(e,tab)}>
+                <AiOutlineClose />
+                </div>
+            </Link>
+            </div>
+        );
     }
-}, [selected, tabs]);
 
-const handleTabClose = (tab: string) => {
-    var temp = [...tabs];
-    var index = temp.indexOf(tab);
-    if (index !== 0) {
-    if (selected === tab) {
-        navigate(`/`);
-    }
-    temp.splice(index, 1);
-    setTabs(temp);
-    }
-};
 
-function Tab({ tab }: { tab: string }) {
     return (
-        <div
-        className={selected === tab ? "tab selected" : "tab"}
-        >
-        <Link className="tab-outline"to={tab === "general.java" ? "/" : `/${tab}`}>
-            <div className="tab-icon">
-            {TAB_ICONS[tab] || <AiOutlineFilePdf />}
-            </div>
-            <div className="tab-name">{tab}</div>
-            <div className="close-tab" onClick={() => handleTabClose(tab)}>
-            X
-            </div>
-        </Link>
+        <div className="tabs">
+        {tabs.map((tab) => (
+            <Tab key={tab} tab={tab} />
+        ))}
         </div>
     );
-}
-
-
-return (
-    <div className="tabs">
-    {tabs.map((tab) => (
-        <Tab key={tab} tab={tab} />
-    ))}
-    </div>
-);
 };
 
 export default Tabs;
