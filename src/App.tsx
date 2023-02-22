@@ -1,7 +1,6 @@
-import React from "react";
 import { Route, Routes } from "react-router";
-import Navbar from "./components/Navbar";
-import Tabs from "./components/Tabs";
+import Navbar from "./components/Navbar/index";
+import Tabs from "./components/Tabs/index";
 import Contact from "./pages/Contact";
 import Employment from "./pages/Employment";
 import Home from "./pages/Home";

@@ -1,0 +1,34 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-btns {
+    background-color: rgb(24, 23, 23);
+    display: flex;
+    flex-direction: column;
+    width: 60px;
+    height: 100%;
+    font-size: xx-large;
+    border: solid 1px black;
+    align-items: center;
+}
+
+.nav-btn {
+    color: gray;
+    padding: 10px;
+}
+
+.nav-btn:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.folder-icon, .file-icon {
+    display: flex;
+    align-items: center;
+}
+
+.folder-icon svg, .file-icon svg {
+    margin-right: 6px;
+}
