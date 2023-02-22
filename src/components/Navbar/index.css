@@ -7,7 +7,7 @@
     background-color: rgb(24, 23, 23);
     display: flex;
     flex-direction: column;
-    width: 60px;
+    width: 55px;
     height: 100%;
     font-size: xx-large;
     border: solid 1px black;
@@ -24,11 +24,51 @@
     cursor: pointer;
 }
 
-.folder-icon, .file-icon {
+.nav-sections {
+    background-color: rgb(24, 23, 23);
+    width: 220px;
+    border-right:  solid 1px black;
+    font-size: 1.rem;
+    padding-top: 35px;
+}
+
+.file {
+    color: gray;
+    margin-bottom: 10px;
+}
+
+.file:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.folder-icon{
+    padding-left: 17px;
+    display: flex;
+    align-items: center;
+}
+
+.file-icon {
+    padding-left: 40px;
     display: flex;
     align-items: center;
 }
 
 .folder-icon svg, .file-icon svg {
-    margin-right: 6px;
+    margin-right: 3px;
+    font-size: 1.2rem;
+}
+
+.top{
+    font-weight: 1000;
+    padding-left: 15px;
+}
+
+
+a {
+    text-decoration: none;
+    color: gray;
+}
+a:visited {
+    color: inherit;
 }

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { AiOutlineClose, AiOutlineFilePdf, AiOutlineHtml5 } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineFilePdf, AiOutlineFileText } from "react-icons/ai";
 import { FaJava } from "react-icons/fa";
-import { SiJavascript } from "react-icons/si";
+import { SiCplusplus } from "react-icons/si";
 import { VscJson } from "react-icons/vsc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./index.css";
 
 const TAB_ICONS: {[key: string]: JSX.Element} = {
 "general.java": <FaJava />,
-"employment.js": <SiJavascript />,
-"projects.html": <AiOutlineHtml5 />,
+"employment.cpp": <SiCplusplus />,
+"projects.yaml": <AiOutlineFileText />,
 "contact.json": <VscJson />,
 };
 
@@ -23,7 +23,6 @@ const Tabs = () => {
 
     
     useEffect(() => {
-        console.log(location)
         if (location !== "") {
             if (!tabs.includes(location)) {
                 setTabs([...tabs, location]);

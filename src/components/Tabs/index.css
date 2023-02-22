@@ -1,11 +1,15 @@
 .tabs{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    
     width: 100%;
     background-color: #232323;
 }
 
 .tab{
+    display: flex;
+    align-items: center;
     color: gray;
     padding: 5px;
     padding-right: 10px;
@@ -13,6 +17,7 @@
 
 .tab-icon{
     font-size: 1.2rem;
+    padding-left: 6px;
 }
 
 .tab-outline {
@@ -27,6 +32,10 @@
     color: #232323;
     cursor: pointer;
     padding: 3px;
+    padding-bottom: 1px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
 }
 
 .tab:hover .close-tab{
@@ -34,7 +43,6 @@
 }
 
 .close-tab:hover {
-    color: white;
     background-color: #363636;
     border-radius: 20%;
 }
@@ -46,4 +54,13 @@
 
 .tab.selected .close-tab {
     color: white;
+}
+
+
+a {
+    text-decoration: none;
+    color: gray;
+}
+a:visited {
+    color: inherit;
 }

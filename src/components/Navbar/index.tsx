@@ -1,36 +1,40 @@
 import { useState } from "react";
-import { AiOutlineRight, AiOutlineMail, AiOutlineFilePdf, AiOutlineGithub, AiOutlineDown, AiOutlineFolder, AiOutlineFolderOpen, AiOutlineLinkedin, AiOutlineHtml5 } from "react-icons/ai";
+import { AiOutlineRight, AiOutlineMail, AiOutlineFilePdf, AiOutlineGithub, AiOutlineDown, AiOutlineFolder, AiOutlineFolderOpen, AiOutlineLinkedin, AiOutlineFileText } from "react-icons/ai";
 import { HiOutlineDocumentDownload } from "react-icons/hi"
 import { VscFiles,VscJson } from "react-icons/vsc";
-import { SiJavascript } from "react-icons/si"
+import { SiCplusplus } from "react-icons/si"
 import { FaJava } from 'react-icons/fa';
 import './index.css';
 import { Link } from "react-router-dom";
 
 const files = {
-    children: 
-    [
+    children: [
         {
-            name: 'general.java' 
-        },
-        {
-            name: 'more info',
-            children: [
+            name: 'GIORGI SAMUSHIA',
+            children: 
+            [
                 {
-                    name: 'employment.js'
+                    name: 'general.java' 
                 },
                 {
-                    name: 'projects.html'
-                },
-                {
-                    name: 'contact.json',
-                },
-                {
-                    name: 'resume.pdf',
+                    name: 'more info',
+                    children: [
+                        {
+                            name: 'employment.cpp'
+                        },
+                        {
+                            name: 'projects.yaml'
+                        },
+                        {
+                            name: 'contact.json',
+                        },
+                        {
+                            name: 'resume.pdf',
+                        }
+                    ]
                 }
             ]
         }
-
     ]
 }
 
@@ -48,14 +52,20 @@ function getFileIcon(fileName: string) {
     switch(fileName) {
     case 'general.java':
         return <FaJava />;
-    case 'employment.js':
-        return <SiJavascript />;
-    case 'projects.html':
-        return <AiOutlineHtml5 />;
+    case 'employment.cpp':
+        return <SiCplusplus />;
+    case 'projects.yaml':
+        return <AiOutlineFileText />;
     case 'contact.json':
         return <VscJson />;
-    default:
+    case 'resume.pdf':
         return <AiOutlineFilePdf />;
+    case 'openfolder':
+        return <AiOutlineFolderOpen />;
+    case 'closedfolder':
+            return <AiOutlineFolder />;
+    default:
+        return;
     }
 }
 
@@ -64,22 +74,16 @@ function Entry({ entry, depth }: EntryProps) {
 
     const toggleExpand = () => setIsExpanded(!isExpanded);
 
-    const fileClass = isExpanded ? 'file file-expanded' : 'file';
+
 
     const renderFileInfo = () => {
         if (entry.children) {
-            return isExpanded ? (
-                <div className="folder-icon">
-                <AiOutlineDown />
-                <AiOutlineFolderOpen />  
-                <span className="entry-name">{entry.name}</span>
+            return (
+                <div className={entry.name === 'GIORGI SAMUSHIA' ? 'top' : 'folder-icon'}>
+                    {isExpanded ? <AiOutlineDown /> : <AiOutlineRight />}
+                    {entry.name !== 'GIORGI SAMUSHIA' ? getFileIcon(isExpanded ? 'openfolder' : 'closedfolder') : null}
+                    <span>{entry.name}</span>
                 </div>
-            ) : (
-                <div className="folder-icon">
-                <AiOutlineRight />
-                <AiOutlineFolder />
-                <span className="entry-name">{entry.name}</span>
-                </div>    
             );
             } else {
             return (
@@ -95,11 +99,11 @@ function Entry({ entry, depth }: EntryProps) {
 
     return (
     <div>
-        <div className={fileClass} onClick={toggleExpand}>
+        <div className="file" onClick={toggleExpand}>
             {renderFileInfo()}
         </div>
         {isExpanded && (
-        <div style={{ paddingLeft: `${depth * 15}px` }}>
+        <div style={{ paddingLeft: `${depth + 12}px` }}>
             {entry.children?.map((childEntry) => (
             <Entry key={childEntry.name} entry={childEntry} depth={depth + 1} />
             ))}
