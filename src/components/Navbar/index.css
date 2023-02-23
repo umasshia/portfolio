@@ -30,6 +30,8 @@
     border-right:  solid 1px black;
     font-size: 1.rem;
     padding-top: 35px;
+    overflow: auto;
+    resize: horizontal;
 }
 
 .file {

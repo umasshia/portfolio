@@ -20,21 +20,9 @@ img {
   width: 100vw;
 }
 
-.resume-wrap {
-  width: 80%;
-  height: 80%;
-}
-
-.repos {
-  margin: 20px;
-  display: grid;
-  grid-template-columns: 365px 365px 365px;
-  grid-template-rows: 100px 100px 100px 100px 100px;
-}
-
 .code{
     padding-left: 42px;
-    overflow-y: scroll;
+    overflow: scroll;
 }
 
 .yml{
@@ -52,5 +40,5 @@ img {
 }
 
 .page-layout {
-  overflow-y: scroll;
+  overflow: scroll;
 }
