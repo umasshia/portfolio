@@ -9,7 +9,7 @@ import "./index.css";
 const TAB_ICONS: {[key: string]: JSX.Element} = {
 "general.java": <FaJava />,
 "experience.cpp": <SiCplusplus />,
-"projects.yaml": <AiOutlineFileText />,
+"projects.yml": <AiOutlineFileText />,
 "contact.json": <VscJson />,
 };
 

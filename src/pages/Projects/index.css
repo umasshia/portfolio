@@ -1,0 +1,10 @@
+.yml{
+    padding-left: 50px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.yml a {
+    color: violet;
+    text-decoration: none;
+}

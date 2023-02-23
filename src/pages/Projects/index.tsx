@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import "./index.css"
 
 interface Repo {
     name: string;

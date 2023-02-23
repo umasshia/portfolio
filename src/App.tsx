@@ -20,7 +20,7 @@ function App() {
             <Route path="/" element={<Home />}></Route>
             <Route path="/general.java" element={<General />}></Route>
             <Route path="/experience.cpp" element={<Experience />}></Route>
-            <Route path="/projects.yaml" element={<Projects />}></Route>
+            <Route path="/projects.yml" element={<Projects />}></Route>
             <Route path="/contact.json" element={<Contact />}></Route>
             <Route path="/resume.pdf" element={<Resume />}></Route>
           </Routes>

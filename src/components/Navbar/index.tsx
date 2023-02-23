@@ -23,7 +23,7 @@ const files = {
                             name: 'experience.cpp'
                         },
                         {
-                            name: 'projects.yaml'
+                            name: 'projects.yml'
                         },
                         {
                             name: 'contact.json',
@@ -54,7 +54,7 @@ function getFileIcon(fileName: string) {
         return <FaJava />;
     case 'experience.cpp':
         return <SiCplusplus />;
-    case 'projects.yaml':
+    case 'projects.yml':
         return <AiOutlineFileText />;
     case 'contact.json':
         return <VscJson />;
