@@ -3,6 +3,10 @@
     flex-direction: row;
 }
 
+.navbar.closed {
+    width: 55px;
+}
+
 .nav-btns {
     background-color: rgb(24, 23, 23);
     display: flex;

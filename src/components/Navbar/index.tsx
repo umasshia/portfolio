@@ -127,7 +127,7 @@ const Navbar = () => {
     const [navExpanded, setNavExpanded] = useState(false);
 
     return (
-        <div className={navExpanded ? "navbar" : ""}>
+        <div className={navExpanded ? "navbar" : "navbar closed"}>
             <div className="nav-btns">
                 <VscFiles className="nav-btn" onClick={() => setNavExpanded(!navExpanded)}/>
                 <a target="_blank" rel="noopener noreferrer" href="https://github.com/umasshia?tab=repositories" title="Github">

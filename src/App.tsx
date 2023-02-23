@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Route, Routes } from "react-router";
 import Email from "./components/Email";
 import Navbar from "./components/Navbar";
@@ -11,19 +10,8 @@ import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 
 function App() {
-
-  const [revealed, setRevealed] = useState(false)
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'e' && e.ctrlKey)
-    setRevealed(!revealed)
-  };
-
   return (
-    <div className="main"
-        onKeyDown={(e) => handleKeyDown(e)}
-      tabIndex={0}
-    >
+    <div className="main">
       <Navbar />
       <div className="page-wrap">
         <Tabs />
@@ -37,7 +25,7 @@ function App() {
             <Route path="/resume.pdf" element={<Resume />}></Route>
           </Routes>
         </div>
-        {revealed ? <Email /> : ''}
+        <Email /> 
       </div>
     </div>
   );

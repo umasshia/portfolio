@@ -9,7 +9,6 @@ const Home = () => {
             </div>
             <div className="content">
                 Feel free to explore by clicking the file icon in the navigation bar<br />
-                If at any point you choose to message me, please press ctrl + e
             </div>    
             
         </div>
