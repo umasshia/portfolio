@@ -1,12 +1,15 @@
 {
-    "contact_details: {
+    "contact_details: 
+    {
         "name": "Giorgi Samushia",
         "address": "3640 Tibbett Ave, Bronx, NY, 10463",
-        "reach_at": {
+        "reach_at": 
+        {
             "mail": "giorgisamu.gs@gmail.com",
             "phone": "+1 (929) 486 - 9343"
         },
-        "links": {
+        "links": 
+        {
             "linkedin": "linkedin.com/in/giorgisamushia",
             "github": "github.com/umasshia",
             "portfolio": "umasshia.github.io/portfolio"
