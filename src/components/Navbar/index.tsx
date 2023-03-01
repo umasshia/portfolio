@@ -74,8 +74,6 @@ function Entry({ entry, depth }: EntryProps) {
 
     const toggleExpand = () => setIsExpanded(!isExpanded);
 
-
-
     const renderFileInfo = () => {
         if (entry.children) {
             return (
@@ -139,7 +137,7 @@ const Navbar = () => {
                 <a target="_blank" rel="noopener noreferrer" href="mailto:giorgisamu.gs@gmail.com" title="Contact Me">
                 <AiOutlineMail className="nav-btn"/>
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1zEWd_3VHZTNonvaibEt44cCctmDtbN2m/view?usp=share_link" title="Download My Resume" download>
+                <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1FA09vNnUMPuDld58xdlus3JXH_hK2Y3_/view?usp=share_link" title="Download My Resume" download>
                 <HiOutlineDocumentDownload className="nav-btn"/>
                 </a>
             </div>
