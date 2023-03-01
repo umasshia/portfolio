@@ -13,11 +13,7 @@ function Projects() {
 
     useEffect(() => {
         const fetchRepos = async () => {
-            const response = await fetch('https://api.github.com/users/umasshia/repos', {
-                headers: {
-                    'Authorization': 'token ' + process.env.REACT_APP_GITHUB_TOKEN,
-                }
-        });
+            const response = await fetch('https://api.github.com/users/umasshia/repos');
         const data = await response.json(); 
         const repos = data.map((repo: any) => ({
             name: repo.name,
