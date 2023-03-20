@@ -70,11 +70,7 @@
     padding-left: 15px;
 }
 
-
 a {
     text-decoration: none;
     color: gray;
-}
-a:visited {
-    color: inherit;
 }

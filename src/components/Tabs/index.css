@@ -56,11 +56,11 @@
     color: white;
 }
 
-
 a {
     text-decoration: none;
     color: gray;
 }
-a:visited {
-    color: inherit;
+
+li{
+    margin: 10px;
 }
