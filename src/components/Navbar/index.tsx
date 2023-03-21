@@ -70,7 +70,7 @@ function getFileIcon(fileName: string) {
 }
 
 function Entry({ entry, depth }: EntryProps) {
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(true);
 
     const toggleExpand = () => setIsExpanded(!isExpanded);
 
