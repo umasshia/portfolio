@@ -6,16 +6,21 @@
     margin-top: auto;
 }
 
+.write-me{
+    padding-left: 10px;
+    font-size: 15px;
+}
+
 .form{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 10px;
 }
 
 .input{
     border: none;
-    border-top: 1px solid rgb(20, 165, 165);
-    height: 50px;
+    height: 30px;
     padding-left: 10px;
 }
 
@@ -24,21 +29,17 @@
     height: 200px;
 }
 
-textarea{
-    width: 99%;
+textarea, input{
+    width: 70%;
     height: 100%;
     background-color: inherit;
     color: #fbfae8;
     border: none;
-    resize: none;
+    outline: none;
 }
 
-input{
-    width: 99%;
-    height: 100%;
-    background-color: inherit;
-    color: #fbfae8;
-    border: none;
+textarea::placeholder, input::placeholder{
+    color: white;
 }
 
 .submit {
@@ -77,4 +78,15 @@ input{
 .expand:hover, .minimize:hover{
     background-color: #363636;
     border-radius: 20%;
+}
+
+label {
+    float: left;
+    margin-right: 10px;
+}
+  
+span {
+    display: block;
+    overflow: hidden;
+    padding: 0px 4px 0px 6px;
 }

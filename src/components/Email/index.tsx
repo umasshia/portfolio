@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { send } from 'emailjs-com';
 import "./index.css";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
@@ -9,6 +9,14 @@ const Email = () => {
     const PUBLIC_KEY = process.env.REACT_APP_PUBLIC_KEY as string
     
     const [revealed, setRevealed] = useState(false)
+    const [blink, setBlink] = useState(true)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setBlink(!blink);
+        }, 700)
+        return () => clearInterval(interval);
+    })
 
     const [toSend, setToSend] = useState({
         from_email: "",
@@ -18,20 +26,24 @@ const Email = () => {
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement | MouseEvent>) => {
         e.preventDefault();
-        send(
-            SERVICE_ID,
-            TEMPLATE_ID,
-            toSend,
-            PUBLIC_KEY
-        )
-        .then((response) => {
-            console.log('SUCCESS!', response.status, response.text);
-            alert("Message Sent Successfuly :)")
-        })
-        .catch((err) => {
-            console.log('FAILED...', err);
-            alert("Something went wrong :(")
-        });
+        if (toSend.from_email === "" || toSend.message === "" || toSend.subject === "") {
+            alert("Please fill out every field.")
+        } else {
+            send(
+                SERVICE_ID,
+                TEMPLATE_ID,
+                toSend,
+                PUBLIC_KEY
+            )
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                alert("Message Sent Successfuly :)")
+            })
+            .catch((err) => {
+                console.log('FAILED...', err);
+                alert("Something went wrong :(")
+            });
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -51,24 +63,27 @@ const Email = () => {
             </div>
             <form className="form">
                 <div className="input">
+                    <label htmlFor="from_email">&gt;&nbsp;&nbsp;your email address:</label>
                     <input
                         type="text"
                         name="from_email"
-                        placeholder="Your Email Address"
+                        placeholder={blink ? "__" : ""}
                         onChange={handleChange}
                     />
                 </div>
                 <div className="input">
+                    <label htmlFor="name">&gt;&nbsp;&nbsp;subject:</label>
                     <input
-                        placeholder="Subject"
+                        placeholder={blink ? "__" : ""}
                         type="text"
                         name="subject"
                         onChange={handleChange}
                     />
                 </div>
                 <div className="input message">
+                    <label htmlFor="message">&gt;&nbsp;&nbsp;your message:</label>
                     <textarea
-                        placeholder="Your Message"
+                        placeholder={blink ? "__" : ""}
                         name="message"
                         onChange={handleChange}
                     />
