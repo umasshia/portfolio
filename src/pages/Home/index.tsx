@@ -12,6 +12,9 @@ const Home = () => {
                 <div className="title">Computer Science Student at Manhattan College</div> 
                 <div className="about">
                     <TypewriterComponent
+                        options={{
+                            cursor: ''
+                        }}
                             onInit={(typewriter) => {
                             typewriter
                                 .changeDelay(50)
