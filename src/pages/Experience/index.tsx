@@ -1,17 +1,15 @@
 import txt from "../docs/experience.txt"
-import { railscast, CodeBlock } from "react-code-blocks";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { railscasts } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useFetchText } from "../../utils/FetchTxt";
 
 const Experience = () => {
     const text = useFetchText(txt);
     return (
         <div className="code">
-            <CodeBlock
-                text={text}
-                language="cpp"
-                showLineNumbers={true}
-                theme={railscast}   
-            />
+            <SyntaxHighlighter language="cpp" style={railscasts}>
+                {text}   
+            </SyntaxHighlighter>
         </div>
     );
 };

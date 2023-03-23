@@ -1,17 +1,34 @@
-import txt from "../docs/contact.txt"
-import { railscast, CodeBlock } from "react-code-blocks";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { railscasts } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useFetchText } from "../../utils/FetchTxt";
+import { useEffect, useState } from "react";
 
 const Contact = () => {
-    const text = useFetchText(txt);
+
+    const CODE = `{
+        "contact_details": 
+        {
+            "name": "Giorgi Samushia",
+            "address": "3640 Tibbett Ave, Bronx, NY, 10463",
+            "reach_at": 
+            {
+                "mail": "giorgisamu.gs@gmail.com",
+                "phone": "+1 (929) 486 - 9343"
+            },
+            "links": 
+            {
+                "linkedin": "linkedin.com/in/giorgisamushia",
+                "github": "github.com/umasshia",
+                "portfolio": "umasshia.github.io/portfolio"
+            }
+        }
+    }`
+
     return (
         <div className="code">
-            <CodeBlock
-                text={text}
-                language="json"
-                showLineNumbers={true}
-                theme={railscast}   
-            />
+            <SyntaxHighlighter language="json" style={railscasts}>
+                {CODE}   
+            </SyntaxHighlighter>
         </div>
     );
 };
