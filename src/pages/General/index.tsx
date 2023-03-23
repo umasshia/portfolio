@@ -1,4 +1,6 @@
-import { railscast, CodeBlock } from "react-code-blocks";
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { railscasts } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import './index.css'
 
 const General = () => {
     const text = `
@@ -19,12 +21,12 @@ const General = () => {
     }`;
     return (
         <div className="code">
-            <CodeBlock
-                text={text}
-                language="java"
+            <SyntaxHighlighter
                 showLineNumbers={true}
-                theme={railscast}   
-            />
+                language='java'
+                style={railscasts}>
+                {text}
+            </SyntaxHighlighter>
         </div>
     );
 };

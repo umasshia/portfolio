@@ -1,11 +1,11 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { railscasts } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import { useFetchText } from "../../utils/FetchTxt";
-import { useEffect, useState } from "react";
+import './index.css'
 
 const Contact = () => {
 
-    const CODE = `{
+    const CODE = `
+    {
         "contact_details": 
         {
             "name": "Giorgi Samushia",
@@ -26,7 +26,10 @@ const Contact = () => {
 
     return (
         <div className="code">
-            <SyntaxHighlighter language="json" style={railscasts}>
+            <SyntaxHighlighter
+                showLineNumbers={true}
+                language="json"
+                style={railscasts}>
                 {CODE}   
             </SyntaxHighlighter>
         </div>
