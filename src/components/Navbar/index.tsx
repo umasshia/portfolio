@@ -122,7 +122,7 @@ function renderNavSections() {
 }
 
 const Navbar = () => {
-    const [navExpanded, setNavExpanded] = useState(false);
+    const [navExpanded, setNavExpanded] = useState(true);
 
     return (
         <div className={navExpanded ? "navbar" : "navbar closed"}>
