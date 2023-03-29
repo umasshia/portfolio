@@ -1,9 +1,14 @@
 import { useState } from "react";
-import { AiOutlineRight, AiOutlineMail, AiOutlineFilePdf, AiOutlineGithub, AiOutlineDown, AiOutlineFolder, AiOutlineFolderOpen, AiOutlineLinkedin, AiOutlineFileText } from "react-icons/ai";
+import { AiOutlineRight, AiOutlineMail, AiOutlineGithub, AiOutlineDown, AiOutlineLinkedin } from "react-icons/ai";
 import { HiOutlineDocumentDownload } from "react-icons/hi"
-import { VscFiles,VscJson } from "react-icons/vsc";
-import { SiCplusplus } from "react-icons/si"
-import { FaJava } from 'react-icons/fa';
+import yml from '../../icons/yml.png';
+import java from '../../icons/java.png';
+import cpp from '../../icons/cpp.png';
+import json from '../../icons/json.png';
+import pdf from '../../icons/pdf.png';
+import open from '../../icons/open.png';
+import closed from '../../icons/closed.png';
+import { VscFiles } from "react-icons/vsc";
 import './index.css';
 import { Link } from "react-router-dom";
 
@@ -51,19 +56,19 @@ interface EntryProps {
 function getFileIcon(fileName: string) {
     switch(fileName) {
     case 'general.java':
-        return <FaJava />;
+        return <img alt ='java' src={java} />
     case 'experience.cpp':
-        return <SiCplusplus />;
+        return <img alt ='cpp' src={cpp} />
     case 'projects.yml':
-        return <AiOutlineFileText />;
+            return <img alt='yaml' src={yml} />
     case 'contact.json':
-        return <VscJson />;
+            return <img alt='json' src={json} />
     case 'resume.pdf':
-        return <AiOutlineFilePdf />;
+            return <img alt='pdf' src={pdf} />
     case 'openfolder':
-        return <AiOutlineFolderOpen />;
+        return <img alt='open' src={open} />
     case 'closedfolder':
-            return <AiOutlineFolder />;
+        return <img alt='' src={closed} />
     default:
         return;
     }
@@ -87,9 +92,9 @@ function Entry({ entry, depth }: EntryProps) {
             return (
                 <div className="file-icon">
                 {getFileIcon(entry.name)}
-                <Link to={`/${entry.name}`} >
-                    <span className="entry-name">{entry.name}</span>
-                </Link>
+                    <Link to={`/${entry.name}`} >
+                        <span className="entry-name">{entry.name}</span>
+                    </Link>
                 </div>
             );
         }
@@ -127,18 +132,18 @@ const Navbar = () => {
     return (
         <div className={navExpanded ? "navbar" : "navbar closed"}>
             <div className="nav-btns">
-                <VscFiles className="nav-btn" onClick={() => setNavExpanded(!navExpanded)}/>
+                <VscFiles className="nav-btn files" onClick={() => setNavExpanded(!navExpanded)}/>
                 <a target="_blank" rel="noopener noreferrer" href="https://github.com/umasshia?tab=repositories" title="Github">
-                <AiOutlineGithub className="nav-btn"/>
+                <AiOutlineGithub className="nav-btn github"/>
                 </a>
                 <a target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/giorgisamushia" title="LinkedIn">
-                <AiOutlineLinkedin className="nav-btn" />
+                <AiOutlineLinkedin className="nav-btn linkedin" />
                 </a>
                 <a target="_blank" rel="noopener noreferrer" href="mailto:giorgisamu.gs@gmail.com" title="Contact Me">
-                <AiOutlineMail className="nav-btn"/>
+                <AiOutlineMail className="nav-btn mail"/>
                 </a>
                 <a target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1FA09vNnUMPuDld58xdlus3JXH_hK2Y3_/view?usp=share_link" title="Download My Resume" download>
-                <HiOutlineDocumentDownload className="nav-btn"/>
+                <HiOutlineDocumentDownload className="nav-btn download"/>
                 </a>
             </div>
         {navExpanded && renderNavSections()}

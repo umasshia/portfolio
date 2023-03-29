@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { send } from 'emailjs-com';
 import "./index.css";
-import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
+import { AiOutlineDown, AiOutlineRight, AiOutlineUp } from "react-icons/ai";
+import terminal from "../../icons/terminal.png"
 
 const Email = () => {
     const SERVICE_ID = process.env.REACT_APP_SERVICE_ID as string
@@ -10,6 +11,7 @@ const Email = () => {
     
     const [revealed, setRevealed] = useState(false)
     const [blink, setBlink] = useState(true)
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -24,26 +26,37 @@ const Email = () => {
         message: ""
     });
 
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement | MouseEvent>) => {
-        e.preventDefault();
-        if (toSend.from_email === "" || toSend.message === "" || toSend.subject === "") {
-            alert("Please fill out every field.")
+    const handleSubmit = (e: FormEvent) => {
+        console.log('event')
+        const temp = toSend
+        if (temp.from_email === "" || temp.message === "" || temp.subject === "") {
+            if (temp.from_email !== "") setCount(1)
+            if (temp.subject !== "") setCount(2)
         } else {
-            send(
-                SERVICE_ID,
-                TEMPLATE_ID,
-                toSend,
-                PUBLIC_KEY
-            )
-            .then((response) => {
-                console.log('SUCCESS!', response.status, response.text);
-                alert("Message Sent Successfuly :)")
-            })
-            .catch((err) => {
-                console.log('FAILED...', err);
-                alert("Something went wrong :(")
-            });
+            // send(
+            //     SERVICE_ID,
+            //     TEMPLATE_ID,
+            //     toSend,
+            //     PUBLIC_KEY
+            // )
+            // .then((response) => {
+            //     console.log('SUCCESS!', response.status, response.text);
+            //     alert("Message Sent Successfuly :)")
+            //     setCount(0)
+            //     setToSend({
+            //         from_email: "",
+            //         subject: "",
+            //         message: ""
+            //     }
+            //     )
+            // })
+            // .catch((err) => {
+            //     console.log('FAILED...', err);
+            //     alert("Something went wrong :(")
+            // });
+            console.log('Done : )')
         }
+        e.preventDefault()
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -55,46 +68,61 @@ const Email = () => {
         <div className="email-container">
             <div className="header-bar">
                 <div className="write-me">
-                    Send me a short message! 
+                    <img src={terminal} alt='terminal img' />
+                    send me a short message!
                 </div>
                 <div className="minimize">
                     <AiOutlineDown onClick={() => setRevealed(!revealed)} />
                 </div>
             </div>
-            <form className="form">
+            <form className="form" onSubmit={(e) => handleSubmit(e)}>
                 <div className="input">
-                    <label htmlFor="from_email">&gt;&nbsp;&nbsp;your email address:</label>
+                    <label htmlFor="from_email"><AiOutlineRight/>&nbsp;&nbsp;your email address:</label>
                     <input
                         type="text"
                         name="from_email"
-                        placeholder={blink ? "__" : ""}
                         onChange={handleChange}
+                        autoComplete="off"
+                        autoFocus={count === 0}
                     />
                 </div>
-                <div className="input">
-                    <label htmlFor="name">&gt;&nbsp;&nbsp;subject:</label>
-                    <input
-                        placeholder={blink ? "__" : ""}
-                        type="text"
-                        name="subject"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="input message">
-                    <label htmlFor="message">&gt;&nbsp;&nbsp;your message:</label>
-                    <textarea
-                        placeholder={blink ? "__" : ""}
-                        name="message"
-                        onChange={handleChange}
-                    />
-                </div>
-                <button className="submit" onClick={(e) => handleSubmit(e)} >Send Message</button>
             </form>
+            {count > 0 && (
+                <form className="form" onSubmit={(e) => handleSubmit(e)}>
+                    <div className="input">
+                        <label htmlFor="name"><AiOutlineRight/>&nbsp;&nbsp;subject:</label>
+                        <input
+                            type="text"
+                            name="subject"
+                            onChange={handleChange}
+                            autoComplete="off"
+                            autoFocus={count > 0}
+                        />
+                    </div>
+                </form>
+                )}
+            {count > 1 && (
+                <>
+                    <form className="form" onSubmit={(e) => handleSubmit(e)}>
+                        <div className="input message">
+                            <label htmlFor="message"><AiOutlineRight/>&nbsp;&nbsp;your message:</label>
+                            <textarea
+                                name="message"
+                                onChange={handleChange}
+                                autoComplete="off"
+                                autoFocus={count > 1}
+                            />
+                        </div>
+                    </form>
+                    <button className="submit" onClick={(e) => handleSubmit(e)} >Send Message</button>
+                </>
+                )}
         </div>
     ) : (
             <div className="header-bar">
                 <div className="write-me">
-                    Send me a short message!
+                    <img src={terminal} alt='terminal img' />
+                    send me a short message!
                 </div>
                 <div className="minimize">
                     <AiOutlineUp onClick={() => setRevealed(!revealed)} />

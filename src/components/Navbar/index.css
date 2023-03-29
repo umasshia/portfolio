@@ -7,6 +7,11 @@
     width: 55px;
 }
 
+.entry-name:hover{
+    color: white;
+    cursor: pointer;
+}
+
 .nav-btns {
     background-color: rgb(24, 23, 23);
     display: flex;
@@ -23,8 +28,28 @@
     padding: 10px;
 }
 
-.nav-btn:hover {
+.nav-btn.files:hover {
     color: white;
+    cursor: pointer;
+}
+
+.nav-btn.github:hover {
+    color: #6e5494;
+    cursor: pointer;
+}
+
+.nav-btn.linkedin:hover {
+    color: #0077b5;
+    cursor: pointer;
+}
+
+.nav-btn.mail:hover {
+    color: #DB4437;
+    cursor: pointer;
+}
+
+.nav-btn.download:hover {
+    color: #F4B400;
     cursor: pointer;
 }
 
@@ -74,4 +99,10 @@
 a {
     text-decoration: none;
     color: gray;
+}
+
+img{
+    width: 20px;
+    height: auto;
+    margin-right: 5px;
 }

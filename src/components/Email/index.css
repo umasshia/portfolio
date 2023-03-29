@@ -9,24 +9,30 @@
 .write-me{
     padding-left: 10px;
     font-size: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .form{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
+    padding: 5px;
 }
 
 .input{
     border: none;
-    height: 30px;
+    height: 25px;
     padding-left: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .input.message{
     padding-left: 10px;
     height: 200px;
+    display: block;
 }
 
 textarea, input{
@@ -36,10 +42,7 @@ textarea, input{
     color: #fbfae8;
     border: none;
     outline: none;
-}
-
-textarea::placeholder, input::placeholder{
-    color: white;
+    font-size: 15px;
 }
 
 .submit {
@@ -49,13 +52,13 @@ textarea::placeholder, input::placeholder{
     border: none;
     border-radius: 5px;
     padding: 10px;
-    margin: 10px;
+    margin: 20px;
     cursor: pointer;
 }
 
 .submit:hover {
     color: #191a1a;
-    background-color: rgb(20, 165, 165);
+    background-color: rgb(191, 240, 106);
 }
 
 .header-bar{
@@ -67,7 +70,7 @@ textarea::placeholder, input::placeholder{
     background-color: rgb(24, 23, 23);
     border-bottom:  solid 1px black;
     margin-top: auto;
-    font-size: 13px
+    font-size: 15px
 }
 
 .expand, .minimize{
@@ -83,4 +86,6 @@ textarea::placeholder, input::placeholder{
 label {
     float: left;
     margin-right: 10px;
+    display: flex;
+    align-items: center;
 }

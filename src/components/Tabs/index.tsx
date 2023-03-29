@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { AiOutlineClose, AiOutlineFilePdf, AiOutlineFileText } from "react-icons/ai";
-import { FaJava } from "react-icons/fa";
-import { SiCplusplus } from "react-icons/si";
-import { VscJson } from "react-icons/vsc";
+import { AiOutlineClose } from "react-icons/ai";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import yml from '../../icons/yml.png';
+import java from '../../icons/java.png';
+import cpp from '../../icons/cpp.png';
+import json from '../../icons/json.png';
+import pdf from '../../icons/pdf.png';
 import "./index.css";
 
 const TAB_ICONS: {[key: string]: JSX.Element} = {
-"general.java": <FaJava />,
-"experience.cpp": <SiCplusplus />,
-"projects.yml": <AiOutlineFileText />,
-"contact.json": <VscJson />,
+    "general.java": <img src={java} alt='java'/>,
+"experience.cpp": <img src={cpp} alt='cpp'/>,
+"projects.yml": <img src={yml} alt='yml'/>,
+"contact.json": <img src={json} alt='json'/>,
 };
 
 const Tabs = () => {
@@ -51,7 +53,7 @@ const Tabs = () => {
             >
             <Link className="tab-outline"to={`/${tab}`}>
                 <div className="tab-icon">
-                {TAB_ICONS[tab] || <AiOutlineFilePdf />}
+                {TAB_ICONS[tab] || <img src={pdf} alt='pdf' />}
                 </div>
                 <div className="tab-name">{tab}</div>
                 <div className="close-tab" onClick={(e) => handleTabClose(e,tab)}>
