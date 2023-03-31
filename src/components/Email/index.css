@@ -4,6 +4,7 @@
     background-color: rgb(24, 23, 23);
     border-top:  solid 1px black;
     margin-top: auto;
+    font-family: monospace;
 }
 
 .write-me{
@@ -18,7 +19,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 5px;
+    padding: 10px;
+    padding-bottom: 0px;
+    font-size: 15px;
 }
 
 .input{
@@ -36,12 +39,13 @@
 }
 
 textarea, input{
-    width: 70%;
+    width: 60%;
     height: 100%;
     background-color: inherit;
     color: #fbfae8;
     border: none;
     outline: none;
+    font-family: monospace;
     font-size: 15px;
 }
 
@@ -85,7 +89,19 @@ textarea, input{
 
 label {
     float: left;
-    margin-right: 10px;
     display: flex;
     align-items: center;
+}
+
+.o{
+    color: rgb(177, 37, 65);
+    padding-right: 5px;
+}
+
+.squiggle{
+    color: rgb(67, 142, 238);
+}
+
+.ugs{
+    color: rgb(191, 240, 106);
 }

@@ -1,7 +1,7 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { send } from 'emailjs-com';
 import "./index.css";
-import { AiOutlineDown, AiOutlineRight, AiOutlineUp } from "react-icons/ai";
+import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import terminal from "../../icons/terminal.png"
 
 const Email = () => {
@@ -10,15 +10,8 @@ const Email = () => {
     const PUBLIC_KEY = process.env.REACT_APP_PUBLIC_KEY as string
     
     const [revealed, setRevealed] = useState(false)
-    const [blink, setBlink] = useState(true)
     const [count, setCount] = useState(0)
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setBlink(!blink);
-        }, 700)
-        return () => clearInterval(interval);
-    })
 
     const [toSend, setToSend] = useState({
         from_email: "",
@@ -33,28 +26,27 @@ const Email = () => {
             if (temp.from_email !== "") setCount(1)
             if (temp.subject !== "") setCount(2)
         } else {
-            // send(
-            //     SERVICE_ID,
-            //     TEMPLATE_ID,
-            //     toSend,
-            //     PUBLIC_KEY
-            // )
-            // .then((response) => {
-            //     console.log('SUCCESS!', response.status, response.text);
-            //     alert("Message Sent Successfuly :)")
-            //     setCount(0)
-            //     setToSend({
-            //         from_email: "",
-            //         subject: "",
-            //         message: ""
-            //     }
-            //     )
-            // })
-            // .catch((err) => {
-            //     console.log('FAILED...', err);
-            //     alert("Something went wrong :(")
-            // });
-            console.log('Done : )')
+            send(
+                SERVICE_ID,
+                TEMPLATE_ID,
+                toSend,
+                PUBLIC_KEY
+            )
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                alert("Message Sent Successfuly :)")
+                setCount(0)
+                setToSend({
+                    from_email: "",
+                    subject: "",
+                    message: ""
+                }
+                )
+            })
+            .catch((err) => {
+                console.log('FAILED...', err);
+                alert("Something went wrong :(")
+            });
         }
         e.preventDefault()
     };
@@ -77,8 +69,9 @@ const Email = () => {
             </div>
             <form className="form" onSubmit={(e) => handleSubmit(e)}>
                 <div className="input">
-                    <label htmlFor="from_email"><AiOutlineRight/>&nbsp;&nbsp;your email address:</label>
+                    <label htmlFor="from_email"><span className="o">o</span><span className="ugs">u@gs</span>:<span className="squiggle">~</span>$&nbsp;your email address:</label>
                     <input
+                        className="input field"
                         type="text"
                         name="from_email"
                         onChange={handleChange}
@@ -90,8 +83,9 @@ const Email = () => {
             {count > 0 && (
                 <form className="form" onSubmit={(e) => handleSubmit(e)}>
                     <div className="input">
-                        <label htmlFor="name"><AiOutlineRight/>&nbsp;&nbsp;subject:</label>
+                        <label htmlFor="name"><span className="o">o</span><span className="ugs">u@gs</span>:<span className="squiggle">~</span>$&nbsp;subject:</label>
                         <input
+                            className="input field"
                             type="text"
                             name="subject"
                             onChange={handleChange}
@@ -105,8 +99,9 @@ const Email = () => {
                 <>
                     <form className="form" onSubmit={(e) => handleSubmit(e)}>
                         <div className="input message">
-                            <label htmlFor="message"><AiOutlineRight/>&nbsp;&nbsp;your message:</label>
+                            <label htmlFor="message"><span className="o">o</span><span className="ugs">u@gs</span>:<span className="squiggle">~</span>$&nbsp;your message:</label>
                             <textarea
+                                className="input field"
                                 name="message"
                                 onChange={handleChange}
                                 autoComplete="off"
