@@ -55,7 +55,6 @@ const Email = () => {
                     setTimeout(() => {
                         setSent(true)
                     }, 1000)
-                    setCount(0)
                     setToSend({
                         from_email: "",
                         subject: "",
