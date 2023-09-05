@@ -13,16 +13,28 @@ const Experience = () => {
 
     class CurrentJob::Job {
         public:
+            string title = "Creative Technology Specialist";
+            string company = "Democracy at Work";
+            string dates = "May 2023 - Present";
+            map<int,string> activities = {
+                { 1 : "Maintain and remodel the company website using Nationbuilder, ensuring accurate and up-to-date content using HTML, CSS, JavaScript" },
+                { 2 : "Design and customize a new company website on Squarespace, incorporating code injection and integrating third-party APIs" },
+                { 3 : "Provide technical support and effectively troubleshoot website issues to ensure seamless functionality" },
+                { 4 : "Collaborate with the supervisor to address day-to-day technology challenges and implement solutions" }};
+    }		
+
+    class PastJobOne::Job {
+        public:
             string title = "Tutor";
             string company = "Manhattan College";
-            string dates = "August 2022 - Present";
+            string dates = "August 2022 - May 2023";
             string activity = "Conduct Training in Computer Science and Mathematics courses";
             string[] courses_taught = ["Object-oriented Design in Java", "Web Programming", "Systems Programming",
                             "Calculus", "Computational Linear Algebra for Computer Scientists"];
             string[] languages_taught = ["C++", "Java", "HTML", "CSS", "PHP", "JavaScript", "Bash", "Matlab"] ;
     }		
 
-    class PastJob::Job {
+    class PastJobTwo::Job {
         public:
             string title: "Research Scholar";
             string company: "Manhattan College";

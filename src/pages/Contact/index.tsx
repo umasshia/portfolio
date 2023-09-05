@@ -6,17 +6,14 @@ const Contact = () => {
 
     const CODE = `
     {
-        "contact_details": 
-        {
+        "contact_details": {
             "name": "Giorgi Samushia",
-            "address": "3640 Tibbett Ave, Bronx, NY, 10463",
-            "reach_at": 
-            {
+            "address": "3660 Oxford Ave, Bronx, NY, 10463",
+            "reach_at": {
                 "mail": "giorgisamu.gs@gmail.com",
-                "phone": "+1 (929) 486 - 9343"
+                "phone": "(347) 865-4800"
             },
-            "links": 
-            {
+            "links": {
                 "linkedin": "linkedin.com/in/giorgisamushia",
                 "github": "github.com/umasshia",
                 "portfolio": "umasshia.github.io/portfolio"
