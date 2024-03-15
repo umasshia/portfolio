@@ -9,7 +9,7 @@ const Home = () => {
         <div className="home">
             <div className="header">
                 <div className="name">Giorgi Samushia</div>
-                <div className="title">Computer Science Student at Manhattan College</div> 
+                <div className="title">Creative Technology Lead at Democracy at Work</div> 
                 <div className="about">
                     <TypewriterComponent
                         options={{
