@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <HashRouter>
+    <HashRouter basename='/portfolio'>
       <App />
     </HashRouter>
   </React.StrictMode>
