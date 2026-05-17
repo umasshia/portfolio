@@ -1,70 +1,79 @@
 .navbar {
     display: flex;
     flex-direction: row;
+    flex-shrink: 0;
 }
 
 .navbar.closed {
-    width: 55px;
+    width: var(--nav-icon-width, 55px);
 }
 
-.entry-name:hover{
+.entry-name:hover {
     color: white;
     cursor: pointer;
 }
 
 .nav-btns {
-    background-color: rgb(24, 23, 23);
+    background-color: var(--bg-secondary);
     display: flex;
     flex-direction: column;
-    width: 55px;
-    height: 100%;
+    width: var(--nav-icon-width, 55px);
+    min-width: var(--nav-icon-width, 55px);
+    height: 100vh;
     font-size: xx-large;
     border: solid 1px black;
     align-items: center;
 }
 
 .nav-btn {
-    color: gray;
+    color: var(--text-secondary);
     padding: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.nav-btn.files:hover {
+.nav-btn.files:hover,
+.nav-btn.files:focus-visible {
     color: white;
-    cursor: pointer;
 }
 
-.nav-btn.github:hover {
-    color: #6e5494;
-    cursor: pointer;
+.nav-btn.github:hover,
+.nav-btn.github:focus-visible {
+    color: var(--accent-github);
 }
 
-.nav-btn.linkedin:hover {
-    color: #0077b5;
-    cursor: pointer;
+.nav-btn.linkedin:hover,
+.nav-btn.linkedin:focus-visible {
+    color: var(--accent-linkedin);
 }
 
-.nav-btn.mail:hover {
-    color: #DB4437;
-    cursor: pointer;
+.nav-btn.mail:hover,
+.nav-btn.mail:focus-visible {
+    color: var(--accent-mail);
 }
 
-.nav-btn.download:hover {
-    color: #F4B400;
-    cursor: pointer;
+.nav-btn.download:hover,
+.nav-btn.download:focus-visible {
+    color: var(--accent-download);
 }
 
 .nav-sections {
-    background-color: rgb(24, 23, 23);
-    width: 230px;
-    border-right:  solid 1px black;
-    font-size: 1.rem;
+    background-color: var(--bg-secondary);
+    width: var(--nav-width, 230px);
+    border-right: solid 1px black;
+    font-size: 1rem;
     padding-top: 35px;
     overflow: auto;
-    resize: horizontal;
+    height: 100vh;
 }
 
 .file {
-    color: gray;
+    color: var(--text-secondary);
     margin-bottom: 10px;
 }
 
@@ -73,10 +82,15 @@
     cursor: pointer;
 }
 
-.folder-icon{
+.folder-icon {
     padding-left: 17px;
     display: flex;
     align-items: center;
+}
+
+.folder-icon:focus-visible {
+    outline: 2px solid var(--accent-teal);
+    outline-offset: -2px;
 }
 
 .file-icon {
@@ -85,24 +99,96 @@
     align-items: center;
 }
 
+.file-icon:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
 .folder-icon svg, .file-icon svg {
     margin-right: 3px;
     font-size: 1.2rem;
 }
 
-.top{
+.top {
     font-weight: 1000;
     padding-left: 15px;
     display: flex;
 }
 
-a {
-    text-decoration: none;
-    color: gray;
+.top:focus-visible {
+    outline: 2px solid var(--accent-teal);
+    outline-offset: -2px;
 }
 
-img{
+a {
+    text-decoration: none;
+    color: var(--text-secondary);
+}
+
+a:focus-visible {
+    outline: 2px solid var(--accent-teal);
+    outline-offset: 2px;
+}
+
+img {
     width: 20px;
     height: auto;
     margin-right: 5px;
+}
+
+/* Mobile overlay (hidden on desktop) */
+.nav-overlay {
+    display: none;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        position: fixed;
+        z-index: 100;
+        width: 100%;
+        height: auto;
+    }
+
+    .navbar.closed {
+        width: 100%;
+    }
+
+    .nav-btns {
+        flex-direction: row;
+        width: 100%;
+        height: 48px;
+        min-width: unset;
+        justify-content: space-around;
+        border-bottom: solid 1px black;
+        border-right: none;
+    }
+
+    .nav-sections {
+        position: fixed;
+        top: 48px;
+        left: 0;
+        width: 80vw;
+        max-width: 300px;
+        height: calc(100vh - 48px);
+        z-index: 101;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-overlay {
+        display: block;
+        position: fixed;
+        top: 48px;
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - 48px);
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 100;
+    }
+
+    .nav-btn {
+        padding: 12px;
+        min-width: 44px;
+        min-height: 44px;
+    }
 }

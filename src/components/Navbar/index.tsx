@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { AiOutlineRight, AiOutlineMail, AiOutlineGithub, AiOutlineDown, AiOutlineLinkedin } from "react-icons/ai";
 import { HiOutlineDocumentDownload } from "react-icons/hi"
 import yml from '../../icons/yml.png';
@@ -11,15 +11,17 @@ import closed from '../../icons/closed.png';
 import { VscFiles } from "react-icons/vsc";
 import './index.css';
 import { Link } from "react-router-dom";
+import { resumePath } from "../../data/resume";
+import { personal } from "../../data/personal";
 
 const files = {
     children: [
         {
             name: 'GIORGI SAMUSHIA',
-            children: 
+            children:
             [
                 {
-                    name: 'general.java' 
+                    name: 'general.java'
                 },
                 {
                     name: 'more info',
@@ -56,19 +58,19 @@ interface EntryProps {
 function getFileIcon(fileName: string) {
     switch(fileName) {
     case 'general.java':
-        return <img alt ='java' src={java} />
+        return <img alt='Java file' src={java} />
     case 'experience.cpp':
-        return <img alt ='cpp' src={cpp} />
+        return <img alt='C++ file' src={cpp} />
     case 'projects.yml':
-            return <img alt='yaml' src={yml} />
+            return <img alt='YAML file' src={yml} />
     case 'contact.json':
-            return <img alt='json' src={json} />
+            return <img alt='JSON file' src={json} />
     case 'resume.pdf':
-            return <img alt='pdf' src={pdf} />
+            return <img alt='PDF file' src={pdf} />
     case 'openfolder':
-        return <img alt='open' src={open} />
+        return <img alt='Open folder' src={open} />
     case 'closedfolder':
-        return <img alt='' src={closed} />
+        return <img alt='Closed folder' src={closed} />
     default:
         return;
     }
@@ -79,18 +81,31 @@ function Entry({ entry, depth }: EntryProps) {
 
     const toggleExpand = () => setIsExpanded(!isExpanded);
 
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleExpand();
+        }
+    };
+
     const renderFileInfo = () => {
         if (entry.children) {
             return (
-                <div className={entry.name === 'GIORGI SAMUSHIA' ? 'top' : 'folder-icon'}>
-                    {isExpanded ? <AiOutlineDown /> : <AiOutlineRight />}
+                <div
+                    className={entry.name === 'GIORGI SAMUSHIA' ? 'top' : 'folder-icon'}
+                    role="treeitem"
+                    aria-expanded={isExpanded}
+                    tabIndex={0}
+                    onKeyDown={handleKeyDown}
+                >
+                    {isExpanded ? <AiOutlineDown aria-hidden="true" /> : <AiOutlineRight aria-hidden="true" />}
                     {entry.name !== 'GIORGI SAMUSHIA' ? getFileIcon(isExpanded ? 'openfolder' : 'closedfolder') : null}
                     <span>{entry.name}</span>
                 </div>
             );
             } else {
             return (
-                <div className="file-icon">
+                <div className="file-icon" role="treeitem">
                 {getFileIcon(entry.name)}
                     <Link to={`/${entry.name}`} >
                         <span className="entry-name">{entry.name}</span>
@@ -102,12 +117,12 @@ function Entry({ entry, depth }: EntryProps) {
 
     return (
     <div>
-        <div className="file" onClick={toggleExpand}>
+        <div className="file" onClick={entry.children ? toggleExpand : undefined}>
             {renderFileInfo()}
         </div>
-        {isExpanded && (
-        <div style={{ paddingLeft: `${depth + 12}px` }}>
-            {entry.children?.map((childEntry) => (
+        {isExpanded && entry.children && (
+        <div style={{ paddingLeft: `${depth + 12}px` }} role="group">
+            {entry.children.map((childEntry) => (
             <Entry key={childEntry.name} entry={childEntry} depth={depth + 1} />
             ))}
         </div>
@@ -116,9 +131,9 @@ function Entry({ entry, depth }: EntryProps) {
     );
 }
 
-function renderNavSections() {
+function NavSections() {
     return (
-        <div className="nav-sections">
+        <div className="nav-sections" role="tree" aria-label="File explorer">
             {files.children.map((entry) => (
             <Entry key={entry.name} entry={entry} depth={1} />
             ))}
@@ -128,26 +143,50 @@ function renderNavSections() {
 
 const Navbar = () => {
     const [navExpanded, setNavExpanded] = useState(true);
+    const navRef = useRef<HTMLElement>(null);
+
+    const handleMobileClose = useCallback(() => {
+        if (window.innerWidth <= 768) {
+            setNavExpanded(false);
+        }
+    }, []);
 
     return (
-        <div className={navExpanded ? "navbar" : "navbar closed"}>
-            <div className="nav-btns">
-                <VscFiles className="nav-btn files" onClick={() => setNavExpanded(!navExpanded)}/>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/umasshia?tab=repositories" title="Github">
-                <AiOutlineGithub className="nav-btn github"/>
+        <nav className={navExpanded ? "navbar" : "navbar closed"} aria-label="Site navigation" ref={navRef}>
+            <div className="nav-btns" role="toolbar" aria-label="Quick actions">
+                <button
+                    className="nav-btn files"
+                    onClick={() => setNavExpanded(!navExpanded)}
+                    aria-expanded={navExpanded}
+                    aria-label="Toggle file explorer"
+                >
+                    <VscFiles aria-hidden="true" />
+                </button>
+                <a target="_blank" rel="noopener noreferrer" href={personal.github + "?tab=repositories"} aria-label="GitHub profile">
+                    <AiOutlineGithub className="nav-btn github" aria-hidden="true" />
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="https://linkedin.com/in/giorgisamushia" title="LinkedIn">
-                <AiOutlineLinkedin className="nav-btn linkedin" />
+                <a target="_blank" rel="noopener noreferrer" href={personal.linkedin} aria-label="LinkedIn profile">
+                    <AiOutlineLinkedin className="nav-btn linkedin" aria-hidden="true" />
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href="mailto:giorgisamu.gs@gmail.com" title="Contact Me">
-                <AiOutlineMail className="nav-btn mail"/>
+                <a target="_blank" rel="noopener noreferrer" href={`mailto:${personal.email}`} aria-label="Send email">
+                    <AiOutlineMail className="nav-btn mail" aria-hidden="true" />
                 </a>
-                <a target="_blank" rel="noopener noreferrer" href={require("../../docs/Resume.pdf")} title="Download My Resume" download>
-                <HiOutlineDocumentDownload className="nav-btn download"/>
+                <a target="_blank" rel="noopener noreferrer" href={resumePath} aria-label="Download resume" download>
+                    <HiOutlineDocumentDownload className="nav-btn download" aria-hidden="true" />
                 </a>
             </div>
-        {navExpanded && renderNavSections()}
-        </div>
+            {navExpanded && (
+                <>
+                    <NavSections />
+                    {/* Mobile overlay backdrop */}
+                    <div
+                        className="nav-overlay"
+                        onClick={handleMobileClose}
+                        aria-hidden="true"
+                    />
+                </>
+            )}
+        </nav>
     );
 };
 

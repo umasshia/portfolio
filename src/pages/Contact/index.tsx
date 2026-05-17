@@ -1,33 +1,19 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { railscasts } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import './index.css'
+import { formatContactAsJson } from '../../data/formatters';
 
 const Contact = () => {
-
-    const CODE = `
-    {
-        "contact_details": {
-            "name": "Giorgi Samushia",
-            "address": "3660 Oxford Ave, Bronx, NY, 10463",
-            "reach_at": {
-                "mail": "giorgisamu.gs@gmail.com",
-                "phone": "(347) 865-4800"
-            },
-            "links": {
-                "linkedin": "linkedin.com/in/giorgisamushia",
-                "github": "github.com/umasshia",
-                "portfolio": "umasshia.github.io/portfolio"
-            }
-        }
-    }`
+    const CODE = formatContactAsJson();
 
     return (
         <div className="code">
+            <h1 className="sr-only">Contact Information</h1>
             <SyntaxHighlighter
                 showLineNumbers={true}
                 language="json"
                 style={railscasts}>
-                {CODE}   
+                {CODE}
             </SyntaxHighlighter>
         </div>
     );

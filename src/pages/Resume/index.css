@@ -1,8 +1,44 @@
-.resume-wrap{
+.resume-wrap {
     width: 100%;
     height: 95vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.resume{
+.resume-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.resume-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.resume-download {
+    color: var(--accent-teal);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border: 1px solid var(--accent-teal);
+    border-radius: 4px;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.resume-download:hover {
+    background-color: var(--accent-teal);
+    color: var(--bg-primary);
+}
+
+.resume {
     width: 100%;
+    flex: 1;
+    border: none;
 }

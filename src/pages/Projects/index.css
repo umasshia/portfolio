@@ -1,10 +1,28 @@
-.yml{
-    padding-left: 50px;
+.code {
     font-size: 1rem;
-    line-height: 1.6;
 }
 
-.yml a {
-    color: violet;
-    text-decoration: none;
+.loading-skeleton {
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skeleton-line {
+    height: 16px;
+    width: 60%;
+    background: linear-gradient(90deg, #2a2a2a 25%, #333 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 3px;
+}
+
+.skeleton-line.short {
+    width: 35%;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
