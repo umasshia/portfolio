@@ -6,6 +6,8 @@
 // kind "work": 21 lines (10 on phones). kind "site": 8 lines.
 // `image` is the base name of files in public/img/work/:
 //   site: <image>-340x190.{avif,webp} (1x) and <image>-680x380.{avif,webp} (2x)
+//   work: <image>-920x502 (1x) and <image>-1840x1004 (2x), plus a separate
+//         phone crop <image>-680x476 centred on the subject (art direction)
 interface Props {
   kind?: "work" | "site";
   image?: string;
@@ -24,6 +26,14 @@ const base = image ? `/img/work/${image}` : null;
         <source type="image/avif" srcset={`${base}-340x190.avif 1x, ${base}-680x380.avif 2x`} />
         <source type="image/webp" srcset={`${base}-340x190.webp 1x, ${base}-680x380.webp 2x`} />
         <img src={`${base}-680x380.webp`} width="680" height="380" alt={alt} loading="lazy" decoding="async" />
+      </picture>
+    ) : base ? (
+      <picture>
+        <source media="(max-width: 640px)" type="image/avif" srcset={`${base}-680x476.avif`} />
+        <source media="(max-width: 640px)" type="image/webp" srcset={`${base}-680x476.webp`} />
+        <source type="image/avif" srcset={`${base}-920x502.avif 1x, ${base}-1840x1004.avif 2x`} />
+        <source type="image/webp" srcset={`${base}-920x502.webp 1x, ${base}-1840x1004.webp 2x`} />
+        <img src={`${base}-1840x1004.webp`} width="1840" height="1004" alt={alt} loading="lazy" decoding="async" />
       </picture>
     ) : (
       <span>{label}</span>

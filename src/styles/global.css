@@ -338,8 +338,11 @@ h1 {
 }
 
 /* Heights are whole lines including the frame's two 1px borders. */
+/* One fixed cell: with an auto row, a tall image would grow the row past the
+   frame and its height: 100% would resolve to its own natural height. */
 .figure-box {
   display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: center;
   overflow: hidden;
   color: var(--fg-dim);
@@ -595,6 +598,12 @@ h1 {
     height: calc(var(--line) * 10 - 2px);
   }
 
+  /* Phone frames run from ~1.1:1 to 2.5:1; the phone crop is centred on its
+     subject, so trim evenly around it. */
+  .figure-work img {
+    object-position: center;
+  }
+
   /* Date on its own line above the text; a gap only between entries. */
   .timeline {
     grid-template-columns: minmax(0, 1fr);
@@ -611,5 +620,13 @@ h1 {
 
   .stack-layer {
     color: var(--fg-dim);
+  }
+}
+
+/* Wide phones and small tablets: one column would stretch the 8-line site
+   frames to ~2.9:1 and crop the screenshots' tops and bottoms. */
+@media (min-width: 481px) and (max-width: 640px) {
+  .sites {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

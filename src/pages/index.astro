@@ -20,6 +20,8 @@ const work = [
     name: "Ptchwrk",
     href: "/work/ptchwrk/",
     figure: "[Ptchwrk screenshot]",
+    image: "ptchwrk",
+    alt: "Ptchwrk's mockup editor: a round orange, cream and navy badge placed on the chest of a grey t-shirt, with placement and rotation tools above it.",
     paragraphs: [
       "A tool an embroidery studio uses to place artwork on garments, match colors to real thread, track thread stock and send quotes and invoices. Built alone, 2026 to now, for the General Wear studio.",
       "Under the hood: a canvas mockup editor, k-means palette extraction, CIEDE2000 color matching against Pantone and Madeira thread, AI background removal. React and Vite on Vercel, Flask and SQLite on AWS Lightsail, Cloudflare R2 for files, JWT auth.",
@@ -30,6 +32,8 @@ const work = [
     name: "License Plate Recognition",
     href: "/work/license-plates/",
     figure: "[License plate recognition screenshot]",
+    image: undefined,
+    alt: undefined,
     paragraphs: [
       "A camera system that notices moving vehicles, reads their license plates, checks them against a database and shows the results in a searchable dashboard. Senior capstone, 2023, team of three.",
       "Under the hood: Python motion detection and plate recognition, a Node.js API, MySQL, and a React dashboard with search.",
@@ -98,7 +102,7 @@ const background = [
     <SectionHeading>Work</SectionHeading>
     {work.map((entry) => (
       <article class="work-entry">
-        <Figure label={entry.figure} />
+        <Figure label={entry.figure} image={entry.image} alt={entry.alt} />
         <div class="work-entry-body">
           <h3><a class="entry-name" href={entry.href}>{entry.name}</a></h3>
           <div class="work-entry-text">
