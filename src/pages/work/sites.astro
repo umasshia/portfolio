@@ -1,20 +1,30 @@
 ---
 import Base from "../../layouts/Base.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
+import Figure from "../../components/Figure.astro";
+import { sites } from "../../data/sites.js";
 
-const sites = [
-  { id: "general-wear", name: "General Wear" },
-  { id: "the-bushwick", name: "The Bushwick" },
-  { id: "hudson-haze", name: "Hudson Haze" },
-];
+const intro = "Websites for local businesses in Brooklyn.";
 ---
 
-<Base title="Sites, Giorgi Samushia" description="Sites: placeholder." current="sites">
+<Base title="Sites, Giorgi Samushia" description={intro} current="sites">
+  <nav class="crumb dim" aria-label="Breadcrumb">
+    <a href="/#work">Work</a> / Sites
+  </nav>
   <h1>Sites</h1>
+  <p>{intro}</p>
   {sites.map((site) => (
-    <section class="section" id={site.id}>
+    <section class="section site-entry" id={site.anchor}>
       <SectionHeading>{site.name}</SectionHeading>
-      <p class="dim">[{site.name}: placeholder paragraph]</p>
+      <Figure kind="site" wide image={site.anchor} alt={site.alt} />
+      <p class="site-line">{site.line}</p>
+      <p class="site-stack dim">{site.stack}</p>
+      <p class="site-link"><a href={site.href}>{site.text}</a></p>
     </section>
   ))}
+
+  <Fragment slot="pager">
+    <a href="/#work">Back to work</a>
+    <a href="/work/ptchwrk/">Next: Ptchwrk</a>
+  </Fragment>
 </Base>

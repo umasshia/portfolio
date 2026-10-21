@@ -3,7 +3,9 @@
 // never knocks the page off the 24px grid. The image fills the frame with
 // object-fit: cover, anchored top left. Without `image` it shows a dim label.
 //
-// kind "work": 21 lines (10 on phones). kind "site": 8 lines.
+// kind "work": 21 lines (10 on phones). kind "site": 8 lines, or the work
+// heights when `wide` (full column; only the 680px file is offered so a 1x
+// screen doesn't pick the 340px one).
 // `image` is the base name of files in public/img/work/:
 //   site: <image>-340x190.{avif,webp} (1x) and <image>-680x380.{avif,webp} (2x)
 //   work: <image>-920x502 (1x) and <image>-1840x1004 (2x), plus a separate
@@ -14,15 +16,21 @@ interface Props {
   alt?: string;
   label?: string;
   caption?: string;
+  wide?: boolean;
 }
 
-const { kind = "work", image, alt = "", label = "[Screenshot]", caption } = Astro.props;
+const { kind = "work", image, alt = "", label = "[Screenshot]", caption, wide = false } = Astro.props;
 const base = image ? `/img/work/${image}` : null;
 ---
 
 <figure class="figure">
-  <div class={`figure-box figure-${kind}`}>
-    {base && kind === "site" ? (
+  <div class={`figure-box figure-${kind}${wide ? " figure-wide" : ""}`}>
+    {base && kind === "site" && wide ? (
+      <picture>
+        <source type="image/avif" srcset={`${base}-680x380.avif`} />
+        <img src={`${base}-680x380.webp`} width="680" height="380" alt={alt} loading="lazy" decoding="async" />
+      </picture>
+    ) : base && kind === "site" ? (
       <picture>
         <source type="image/avif" srcset={`${base}-340x190.avif 1x, ${base}-680x380.avif 2x`} />
         <source type="image/webp" srcset={`${base}-340x190.webp 1x, ${base}-680x380.webp 2x`} />

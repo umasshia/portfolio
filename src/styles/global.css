@@ -357,6 +357,10 @@ h1 {
   height: calc(var(--line) * 8);
 }
 
+.figure-wide {
+  height: calc(var(--line) * 21);
+}
+
 .figure-caption {
   color: var(--fg-dim);
 }
@@ -414,6 +418,22 @@ h1 {
 /* Name, line and link read as one block, so no paragraph gap inside a cell. */
 .sites .site-link {
   margin-top: 0;
+}
+
+/* ---------- Sites page ---------- */
+
+/* Description, stack and link read as one block under the frame. */
+.site-entry .site-line {
+  margin-top: var(--line);
+}
+
+.site-entry .site-stack,
+.site-entry .site-link {
+  margin-top: 0;
+}
+
+.site-entry .site-link a {
+  overflow-wrap: anywhere;
 }
 
 /* ---------- Background ---------- */
@@ -655,7 +675,8 @@ h1 {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .figure-work {
+  .figure-work,
+  .figure-wide {
     height: calc(var(--line) * 10);
   }
 

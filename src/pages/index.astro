@@ -4,13 +4,17 @@ import SectionHeading from "../components/SectionHeading.astro";
 import IndexRow from "../components/IndexRow.astro";
 import Figure from "../components/Figure.astro";
 import Button from "../components/Button.astro";
+import { sites } from "../data/sites.js";
 
 const rows = [
   { href: "/work/ptchwrk/", name: "Ptchwrk", year: "2026", description: "Embroidery studio platform", where: "ptchwrk.xyz" },
-  { href: "/work/license-plates/", name: "License Plate Recognition", year: "2023", description: "Camera system that reads plates", where: "github.com/umasshia" },
-  { href: "/work/sites/#general-wear", name: "General Wear", year: "2026", description: "Embroidery studio website", where: "generalwear.vercel.app" },
-  { href: "/work/sites/#the-bushwick", name: "The Bushwick", year: "2026", description: "Dispensary website, Bushwick", where: "thebushwicknyc.com" },
-  { href: "/work/sites/#hudson-haze", name: "Hudson Haze", year: "2026", description: "Dispensary site, East New York", where: "hudsonhaze.com" },
+  ...sites.map((site) => ({
+    href: `/work/sites/#${site.anchor}`,
+    name: site.name,
+    year: site.year,
+    description: site.summary,
+    where: site.text,
+  })),
   { href: "#background", name: "Background", year: "", description: "School and work history", where: "" },
   { href: "#contact", name: "Contact", year: "", description: "Email, LinkedIn, GitHub", where: "" },
 ];
@@ -27,45 +31,6 @@ const work = [
       "Under the hood: a canvas mockup editor, k-means palette extraction, CIEDE2000 color matching against Pantone and Madeira thread, AI background removal. React and Vite on Vercel, Flask and SQLite on AWS Lightsail, Cloudflare R2 for files, JWT auth.",
     ],
     link: { href: "https://ptchwrk.xyz", text: "ptchwrk.xyz" },
-  },
-  {
-    name: "License Plate Recognition",
-    href: "/work/license-plates/",
-    figure: "[License plate recognition screenshot]",
-    image: undefined,
-    alt: undefined,
-    paragraphs: [
-      "A camera system that notices moving vehicles, reads their license plates, checks them against a database and shows the results in a searchable dashboard. Senior capstone, 2023, team of three.",
-      "Under the hood: Python motion detection and plate recognition, a Node.js API, MySQL, and a React dashboard with search.",
-    ],
-    link: { href: "https://github.com/umasshia/capstone-backend", text: "github.com/umasshia/capstone-backend" },
-  },
-];
-
-const sites = [
-  {
-    name: "General Wear",
-    anchor: "general-wear",
-    alt: "General Wear's catalog page: a photo of embroidery machines behind the title Product Catalog.",
-    line: "Site for an embroidery and apparel decoration studio in Greenpoint.",
-    href: "https://generalwear.vercel.app",
-    text: "generalwear.vercel.app",
-  },
-  {
-    name: "The Bushwick",
-    anchor: "the-bushwick",
-    alt: "The Bushwick homepage: the graffiti-style title The Bushwick Dispensary, two deals and an Order Now button.",
-    line: "Site for a dispensary in Bushwick, with online ordering.",
-    href: "https://thebushwicknyc.com",
-    text: "thebushwicknyc.com",
-  },
-  {
-    name: "Hudson Haze",
-    anchor: "hudson-haze",
-    alt: "Hudson Haze homepage: the Hudson Haze Cannabis logo on black, with Shop Menu and Visit Us buttons.",
-    line: "Site for a dispensary in East New York, with online ordering.",
-    href: "https://hudsonhaze.com",
-    text: "hudsonhaze.com",
   },
 ];
 
