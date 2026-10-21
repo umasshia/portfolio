@@ -1,21 +1,22 @@
 ---
 // A screenshot frame. Without `src` it renders an empty placeholder frame
-// (504px, 21 lines) labelled in dim text.
+// labelled in dim text: 504px (21 lines) by default, 192px (8 lines) when small.
 interface Props {
   src?: string;
   alt?: string;
   width?: number;
   height?: number;
   label?: string;
+  small?: boolean;
 }
 
-const { src, alt = "", width, height, label = "[Screenshot]" } = Astro.props;
+const { src, alt = "", width, height, label = "[Screenshot]", small = false } = Astro.props;
 ---
 
 <figure class="figure">
   {src ? (
     <img src={src} alt={alt} width={width} height={height} />
   ) : (
-    <div class="figure-empty">{label}</div>
+    <div class={small ? "figure-empty figure-empty-small" : "figure-empty"}>{label}</div>
   )}
 </figure>

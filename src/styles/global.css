@@ -260,7 +260,7 @@ h1 {
 .index-head,
 .row {
   display: grid;
-  grid-template-columns: 28ch 6ch minmax(0, 1fr) 24ch;
+  grid-template-columns: 26ch 6ch minmax(0, 1fr) 22ch;
   column-gap: 2ch;
 }
 
@@ -347,6 +347,62 @@ h1 {
   /* 21 lines including the frame's two 1px borders. */
   height: calc(var(--line) * 21 - 2px);
   color: var(--fg-dim);
+}
+
+/* 8 lines including the frame's two 1px borders. */
+.figure-empty-small {
+  height: calc(var(--line) * 8 - 2px);
+}
+
+/* ---------- Work entries ---------- */
+
+.work-entry + .work-entry {
+  margin-top: calc(var(--line) * 2);
+}
+
+.work-entry-body {
+  display: grid;
+  grid-template-columns: 22ch minmax(0, 1fr);
+  column-gap: 2ch;
+  margin-top: var(--line);
+}
+
+.work-entry-text {
+  max-width: 64ch;
+}
+
+.entry-name {
+  font-weight: 600;
+}
+
+/* ---------- Sites grid ---------- */
+
+.sites {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--line) 4ch;
+}
+
+.sites p {
+  overflow-wrap: anywhere;
+}
+
+/* Name, line and link read as one block, so no paragraph gap inside a cell. */
+.sites .site-link {
+  margin-top: 0;
+}
+
+/* ---------- Background ---------- */
+
+.timeline {
+  display: grid;
+  grid-template-columns: 14ch minmax(0, 1fr);
+  gap: var(--line) 2ch;
+  max-width: 80ch;
+}
+
+.timeline strong {
+  font-weight: 600;
 }
 
 /* ---------- Button ---------- */
@@ -437,6 +493,14 @@ h1 {
   color: var(--fg-dim);
 }
 
+.footer a {
+  color: var(--fg-dim);
+}
+
+.footer a:hover {
+  color: var(--bg);
+}
+
 .footer::before {
   content: "";
   position: absolute;
@@ -475,12 +539,10 @@ h1 {
     margin-left: -1ch;
   }
 
-  /* 36px is off the 24px grid; 12px of padding puts the next line back on
-     it. Padding, not margin, so it can't collapse into a section's margin. */
+  /* 48px keeps a wrapped name on the grid at any line count. */
   h1 {
     font-size: 24px;
-    line-height: 36px;
-    padding-bottom: 12px;
+    line-height: calc(var(--line) * 2);
   }
 
   .index-head-full {
@@ -507,8 +569,20 @@ h1 {
   .row-desc { grid-area: desc; }
   .row-where { display: none; }
 
-  .stack-row {
+  .stack-row,
+  .work-entry-body,
+  .sites {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Date on its own line above the text; a gap only between entries. */
+  .timeline {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0;
+  }
+
+  .timeline > span:not(:first-child) {
+    margin-top: var(--line);
   }
 
   .stack-head {

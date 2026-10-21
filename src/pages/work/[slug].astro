@@ -3,7 +3,10 @@ import Base from "../../layouts/Base.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
 
 export function getStaticPaths() {
-  return [{ params: { slug: "ptchwrk" }, props: { name: "Ptchwrk" } }];
+  return [
+    { params: { slug: "ptchwrk" }, props: { name: "Ptchwrk" } },
+    { params: { slug: "license-plates" }, props: { name: "License Plate Recognition" } },
+  ];
 }
 
 const { name } = Astro.props;

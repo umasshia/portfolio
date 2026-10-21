@@ -1,0 +1,20 @@
+---
+import Base from "../../layouts/Base.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+
+const sites = [
+  { id: "general-wear", name: "General Wear" },
+  { id: "the-bushwick", name: "The Bushwick" },
+  { id: "hudson-haze", name: "Hudson Haze" },
+];
+---
+
+<Base title="Sites, Giorgi Samushia" description="Sites: placeholder." current="sites">
+  <h1>Sites</h1>
+  {sites.map((site) => (
+    <section class="section" id={site.id}>
+      <SectionHeading>{site.name}</SectionHeading>
+      <p class="dim">[{site.name}: placeholder paragraph]</p>
+    </section>
+  ))}
+</Base>

@@ -5,28 +5,56 @@ import IndexRow from "../components/IndexRow.astro";
 import Figure from "../components/Figure.astro";
 import Button from "../components/Button.astro";
 
-// Placeholder rows. The third one is deliberately long to prove the first
-// and last columns wrap instead of truncating.
 const rows = [
-  { href: "#work", name: "[Project]", year: "[Year]", description: "[What it is]", where: "[Where]" },
-  { href: "#work", name: "[Project]", year: "[Year]", description: "[What it is]", where: "[Where]" },
+  { href: "/work/ptchwrk", name: "Ptchwrk", year: "2026", description: "Embroidery studio platform", where: "ptchwrk.xyz" },
+  { href: "/work/license-plates", name: "License Plate Recognition", year: "2023", description: "Camera system that reads plates", where: "github.com/umasshia" },
+  { href: "/work/sites#general-wear", name: "General Wear", year: "2026", description: "Embroidery studio website", where: "generalwear.vercel.app" },
+  { href: "/work/sites#the-bushwick", name: "The Bushwick", year: "2026", description: "Dispensary website, Bushwick", where: "thebushwicknyc.com" },
+  { href: "/work/sites#hudson-haze", name: "Hudson Haze", year: "2026", description: "Dispensary site, East New York", where: "hudsonhaze.com" },
+  { href: "#background", name: "Background", year: "", description: "School and work history", where: "" },
+  { href: "#contact", name: "Contact", year: "", description: "Email, LinkedIn, GitHub", where: "" },
+];
+
+const work = [
   {
-    href: "#sites",
-    name: "[A long placeholder name that has to wrap]",
-    year: "[Year]",
-    description: "[A longer placeholder description, long enough to wrap onto a second line at desktop width]",
-    where: "[a-long-placeholder-domain.example]",
+    name: "Ptchwrk",
+    href: "/work/ptchwrk",
+    figure: "[Ptchwrk screenshot]",
+    paragraphs: [
+      "A tool an embroidery studio uses to place artwork on garments, match colors to real thread, track thread stock and send quotes and invoices. Built alone, 2026 to now, for the General Wear studio.",
+      "Under the hood: a canvas mockup editor, k-means palette extraction, CIEDE2000 color matching against Pantone and Madeira thread, AI background removal. React and Vite on Vercel, Flask and SQLite on AWS Lightsail, Cloudflare R2 for files, JWT auth.",
+    ],
+    link: { href: "https://ptchwrk.xyz", text: "ptchwrk.xyz" },
   },
-  { href: "#sites", name: "[Site]", year: "[Year]", description: "[What it is]", where: "[Where]" },
-  { href: "#sites", name: "[Site]", year: "[Year]", description: "[What it is]", where: "[Where]" },
-  { href: "#background", name: "[Background]", year: "[Year]", description: "[What it is]", where: "[Where]" },
-  { href: "#contact", name: "[Contact]", year: "", description: "[What it is]", where: "[Where]" },
+  {
+    name: "License Plate Recognition",
+    href: "/work/license-plates",
+    figure: "[License plate recognition screenshot]",
+    paragraphs: [
+      "A camera system that notices moving vehicles, reads their license plates, checks them against a database and shows the results in a searchable dashboard. Senior capstone, 2023, team of three.",
+      "Under the hood: Python motion detection and plate recognition, a Node.js API, MySQL, and a React dashboard with search.",
+    ],
+    link: { href: "https://github.com/umasshia/capstone-backend", text: "github.com/umasshia/capstone-backend" },
+  },
+];
+
+const sites = [
+  { name: "General Wear", anchor: "general-wear", line: "Site for an embroidery and apparel decoration studio in Greenpoint.", href: "https://generalwear.vercel.app", text: "generalwear.vercel.app" },
+  { name: "The Bushwick", anchor: "the-bushwick", line: "Site for a dispensary in Bushwick, with online ordering.", href: "https://thebushwicknyc.com", text: "thebushwicknyc.com" },
+  { name: "Hudson Haze", anchor: "hudson-haze", line: "Site for a dispensary in East New York, with online ordering.", href: "https://hudsonhaze.com", text: "hudsonhaze.com" },
+];
+
+const background = [
+  { dates: "2026 to 2027", org: "Cornell Tech", rest: ", New York. MEng Computer Science." },
+  { dates: "2024 to 2026", org: "Democracy at Work", rest: ", a nonprofit media organization. Chief Technology Officer." },
+  { dates: "2023 to 2024", org: "Democracy at Work", rest: ". Creative Technology Specialist." },
+  { dates: "to 2023", org: "Manhattan University", rest: ". Tutor and research scholar. BS Computer Science, 2023, Magna Cum Laude, Phi Beta Kappa." },
 ];
 ---
 
 <Base
   title="Giorgi Samushia"
-  description="Giorgi Samushia. Full-stack developer. MEng Computer Science at Cornell Tech, New York."
+  description="Giorgi Samushia, full-stack developer in New York. MEng Computer Science at Cornell Tech. Ptchwrk, an embroidery studio platform, and websites for Brooklyn businesses."
 >
   <header>
     <h1>Giorgi Samushia</h1>
@@ -47,27 +75,54 @@ const rows = [
 
   <section class="section" id="work">
     <SectionHeading>Work</SectionHeading>
-    <p class="dim">[Work: placeholder paragraph]</p>
-    <Figure label="[Screenshot 1]" />
-    <Figure label="[Screenshot 2]" />
+    {work.map((entry) => (
+      <article class="work-entry">
+        <Figure label={entry.figure} />
+        <div class="work-entry-body">
+          <h3><a class="entry-name" href={entry.href}>{entry.name}</a></h3>
+          <div class="work-entry-text">
+            {entry.paragraphs.map((text) => <p>{text}</p>)}
+            <p><a href={entry.link.href}>{entry.link.text}</a></p>
+          </div>
+        </div>
+      </article>
+    ))}
   </section>
 
   <section class="section" id="sites">
     <SectionHeading>Sites</SectionHeading>
-    <p class="dim">[Sites: placeholder paragraph]</p>
+    <p>Websites for local businesses in Brooklyn.</p>
+    <div class="sites">
+      {sites.map((site) => (
+        <article>
+          <Figure small label={`[${site.name} screenshot]`} />
+          <h3 class="site-name"><a class="entry-name" href={`/work/sites#${site.anchor}`}>{site.name}</a></h3>
+          <p>{site.line}</p>
+          <p class="site-link"><a href={site.href}>{site.text}</a></p>
+        </article>
+      ))}
+    </div>
   </section>
 
   <section class="section" id="background">
     <SectionHeading>Background</SectionHeading>
-    <p class="dim">[Background: placeholder paragraph]</p>
+    <div class="timeline">
+      {background.map((item) => (
+        <>
+          <span class="dim">{item.dates}</span>
+          <p><strong>{item.org}</strong>{item.rest}</p>
+        </>
+      ))}
+    </div>
   </section>
 
   <section class="section" id="contact">
     <SectionHeading>Contact</SectionHeading>
-    <p class="dim">[Contact: placeholder paragraph]</p>
+    <p class="dim">[Contact line]</p>
     <div class="buttons">
-      <Button href="#contact">[Primary button]</Button>
-      <Button href="#contact" quiet>[Quiet button]</Button>
+      <Button href="mailto:giorgisamu.gs@gmail.com">Email me</Button>
+      <Button href="https://linkedin.com/in/giorgisamushia" quiet>LinkedIn</Button>
+      <Button href="https://github.com/umasshia" quiet>GitHub</Button>
     </div>
   </section>
 </Base>
