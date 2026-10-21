@@ -1,0 +1,211 @@
+---
+import Base from "../../layouts/Base.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import Figure from "../../components/Figure.astro";
+
+// Copy is verbatim from ~/portfolio-reports/task05/ptchwrk-copy.md.
+const description =
+  "A tool an embroidery studio uses to place artwork on garments, match colors to real thread, track thread stock and send quotes and invoices.";
+
+const meta = [
+  { key: "Year", value: "2026 to now" },
+  { key: "Role", value: "Built alone" },
+  { key: "For", value: "General Wear embroidery studio, Greenpoint" },
+  { key: "Live", value: "ptchwrk.xyz", href: "https://ptchwrk.xyz" },
+  { key: "Code", value: "Private, available on request." },
+];
+
+const whatItIs = [
+  "General Wear is an embroidery studio in Greenpoint. Before Ptchwrk the studio quoted in Printavo, took requests through a JotForm, and matched thread colors by eye. Ptchwrk is the tool the studio runs on now. A customer's artwork comes in as a file, and the tool pulls out the colors in it, matches each one to a real Madeira thread the studio keeps on its walls, and shows how the design sits on a specific shirt or cap. From there the studio builds a quote with sizes, placements and thread colors, turns it into an invoice the customer can open from a link, and schedules the job onto a machine.",
+  "The same tool has a public side. The studio's website can embed Ptchwrk's artwork and mockup editors, so a customer requesting a quote cleans up their design and places it on a garment before anyone at the studio has looked at it, and the request lands in Ptchwrk as a draft quote.",
+  "I built it alone, starting in February 2026, and the studio has been using it since early 2026, adopting each part as it shipped. It is one person's full product: the color science, the editor, the quoting, the scheduling, the deployment and the backups.",
+];
+
+const stack = [
+  {
+    layer: "Front end",
+    choice: "React 19 with Vite, no router, no state library",
+    why: "A path table and plain React state were enough for one app with a dozen pages, and every dependency is one more thing to keep current.",
+  },
+  {
+    layer: "Hosting",
+    choice: "Vercel for the app, one AWS Lightsail box for the API",
+    why: "Vercel because it was what I knew. A move to Cloudflare is under consideration, since Vercel's pricing keeps rising at every tier. Lightsail because a $12 box handles the studio's traffic with room to spare.",
+  },
+  {
+    layer: "API",
+    choice: "Flask, 21 blueprints, about 200 routes",
+    why: "Python because the heavy parts are Python libraries: NumPy for color clustering, fpdf2 and pdfplumber for PDFs. Flask because it's the smallest framework, routes and nothing else, which fits a backend whose rule is heavy lifting only.",
+  },
+  {
+    layer: "Database",
+    choice: "SQLite in WAL mode, six files plus one legacy file, JSON columns for nested data",
+    why: "No database server to run. One writer at a time is a real limit, so counters and capacity checks use explicit immediate transactions.",
+  },
+  {
+    layer: "Backups",
+    choice: "Litestream streaming to Cloudflare R2 about once a second",
+    why: "The whole disaster-recovery story is one service file. A restore drill measured about one second of data at risk.",
+  },
+  {
+    layer: "Files",
+    choice: "Cloudflare R2, streamed through the API",
+    why: "Every file goes through the API so auth applies to it and the bucket needs no CORS rules. Nothing is listed or browsable.",
+  },
+  {
+    layer: "Color matching",
+    choice: "Hand-written CIEDE2000 and k-means in NumPy",
+    why: "CIEDE2000 corrects where plain Lab distance is wrong, mostly in blues and saturated colors, which is exactly where thread matching fails. Written by hand because I was learning the color science as I built it, and neither is big: k-means is a short loop and CIEDE2000 is one formula. Owning them meant I understood what the merge step was doing.",
+  },
+  {
+    layer: "Background removal",
+    choice: "fal.ai running Bria RMBG 2.0",
+    why: "It ran on a Modal GPU first. Cold starts and a bug that silently dropped containers to CPU made a customer-facing button unreliable. fal answers in two to three seconds. Each call costs money, so results are cached by image hash and capped per IP.",
+  },
+  {
+    layer: "Auth",
+    choice: "JWT, HS256, bcrypt passwords, token in localStorage",
+    why: "Sliding sessions: a fixed 24-hour token logged people out mid-task, so tokens last a week and refresh after 12 hours of use. Every request checks a token version in the database so a password change kills all sessions at once.",
+  },
+  {
+    layer: "PDFs",
+    choice: "fpdf2 to build quotes and invoices, pdfplumber to read tech packs",
+    why: "Moved server-side from jsPDF so the customer-facing documents look the same everywhere.",
+  },
+  {
+    layer: "Tests",
+    choice: "About 2,200 cases, plain scripts with a home-made decorator, GitHub Actions",
+    why: "Plain scripts with a small decorator, run as python3 tests/<file>.py: the same command locally, in a clean worktree and in CI, with no framework to install or pin.",
+  },
+];
+
+const decisions = [
+  {
+    title: "Over-cluster, then merge by eye.",
+    body: "Palette extraction asks k-means for up to 40 clusters, far more colors than any design has, so small accent colors get their own cluster instead of being averaged into a neighbor. Then it merges: drop clusters under 0.2% of pixels, group by hue, and drop any color within a CIEDE2000 distance of 15 from one already kept. The palette size comes from that merge, not from k. The clustering runs in RGB because it's fast and the perceptual work happens in the merge, where Lab matters.",
+  },
+  {
+    title: "Brute force is the right index.",
+    body: "Matching a color against 2,300 Pantone entries, or about 400 PolyNeon threads from an 800-color Madeira table, is a linear scan computing CIEDE2000 for each. For at most 25 colors that's about 60,000 cheap evaluations. A k-d tree would be faster and would also be the wrong tool, because CIEDE2000 isn't a metric a k-d tree can partition on. One rule overrides the math: pure white always maps to thread 1802, Snow White, because the studio said so.",
+  },
+  {
+    title: "SQLite with Litestream instead of a database server.",
+    body: "The studio has a handful of staff; a database server is a second thing to run, patch and back up. SQLite on one disk with Litestream streaming every change to R2 gives a recovery point of about one second with one service file. The cost is one writer at a time. Counters and capacity checks use immediate transactions, and I keep all new tables in the six existing files because every new file is three more places to configure.",
+  },
+  {
+    title: "Paying fal.ai per call instead of running the model.",
+    body: "Background removal ran on a Modal GPU. Cold starts and a snapshot bug that silently dropped containers to CPU, at about 50 seconds a call, made a button the customer presses unreliable. fal answers in two to three seconds and costs money per call, so the result is cached in R2 under the image's hash, each IP gets five uncached calls an hour, and the attempt is counted before the call because failed calls are billed too. If costs pass about $80 a month, a self-hosted CPU model is the next step.",
+  },
+  {
+    title: "Revocable JWTs, one query per request.",
+    body: "A stateless token can't be revoked, and a fixed 24-hour token logged people out mid-task. So tokens last a week, refresh after 12 hours of use, and every authenticated request reads the user's token version from the database. Change your password and every session dies at once. The read is deliberately uncached; a per-worker cache would let a revoked token keep working on another gunicorn worker. The cost is one small query per request, which on this traffic is nothing.",
+  },
+  {
+    title: "Money as integer cents, written twice.",
+    body: "Quote math runs in Python, which is authoritative, and again in JavaScript for the live preview as the user types. Both use integer cents and basis points, never floats, and a drift test runs both implementations against the same fixtures in CI. Every pricing rule is written twice, which is the price of a preview that never disagrees with the invoice.",
+  },
+];
+
+const screens = [
+  {
+    label: "[Thread match panel screenshot]",
+    caption: "Every color found in the artwork, its nearest Pantone, and the nearest Madeira thread with a match-quality bar.",
+  },
+  {
+    image: "ptchwrk",
+    alt: "Ptchwrk's mockup editor: a round orange, cream and navy badge placed on the chest of a grey t-shirt, with placement and rotation tools above it.",
+    caption: "Artwork placed inside the garment's sewing field, the area the machine can actually stitch.",
+  },
+  {
+    label: "[Thread inventory screenshot]",
+    caption: "The studio's thread walls as a grid, with stock levels and par levels for each spool.",
+  },
+  {
+    label: "[Quote screenshot]",
+    caption: "Line items with sizes, imprints with placement and thread colors, fees, tax, totals.",
+  },
+  {
+    label: "[Invoice screenshot]",
+    caption: "The customer's view, opened from a link, with a downloadable PDF.",
+  },
+  {
+    label: "[Scheduler screenshot]",
+    caption: "One timeline per machine. Staff place jobs; the server refuses anything that would exceed a station's capacity.",
+  },
+];
+---
+
+<Base title="Ptchwrk, Giorgi Samushia" description={description} current="work">
+  <nav class="crumb dim" aria-label="Breadcrumb">
+    <a href="/#work">Work</a> / Ptchwrk
+  </nav>
+  <h1>Ptchwrk</h1>
+  <p>{description}</p>
+  <dl class="meta">
+    {meta.map((row) => (
+      <>
+        <dt>{row.key}</dt>
+        <dd>{row.href ? <a href={row.href}>{row.value}</a> : row.value}</dd>
+      </>
+    ))}
+  </dl>
+
+  <section class="section">
+    <SectionHeading>What it is</SectionHeading>
+    {whatItIs.map((text) => <p>{text}</p>)}
+  </section>
+
+  <section class="section">
+    <SectionHeading>Try it</SectionHeading>
+    <p>Drop an image and see the colors it contains and the nearest thread for each one. Nothing is uploaded; it runs in your browser.</p>
+    {/* Reserved for the in-browser palette demo; it replaces this Figure. */}
+    <div id="demo">
+      <Figure
+        label="[Thread match panel screenshot]"
+        caption="The thread match panel. Each color found in the artwork, its nearest Pantone, and the nearest Madeira thread with how close the match is."
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <SectionHeading>Stack</SectionHeading>
+    <div class="stack" role="table" aria-label="Stack">
+      <div class="stack-row stack-head" role="row">
+        <span role="columnheader">Layer</span>
+        <span role="columnheader">Choice</span>
+        <span role="columnheader">Why</span>
+      </div>
+      {stack.map((row) => (
+        <div class="stack-row" role="row">
+          <span class="stack-layer" role="cell">{row.layer}</span>
+          <span class="stack-choice" role="cell">{row.choice}</span>
+          <span role="cell">{row.why}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <SectionHeading>Decisions and tradeoffs</SectionHeading>
+    {decisions.map((d) => (
+      <article class="decision">
+        <h3>{d.title}</h3>
+        <p>{d.body}</p>
+      </article>
+    ))}
+  </section>
+
+  <section class="section">
+    <SectionHeading>Screens</SectionHeading>
+    <div class="screens">
+      {screens.map((s) => (
+        <Figure image={s.image} alt={s.alt} label={s.label} caption={s.caption} />
+      ))}
+    </div>
+  </section>
+
+  <Fragment slot="pager">
+    <a href="/#work">Back to work</a>
+    <a href="/work/license-plates/">Next: License Plate Recognition</a>
+  </Fragment>
+</Base>

@@ -33,6 +33,11 @@ const onIndex = Astro.url.pathname === "/";
       <main id="content" tabindex="-1">
         <slot />
       </main>
+      {Astro.slots.has("pager") && (
+        <nav class="pager" aria-label="More work">
+          <slot name="pager" />
+        </nav>
+      )}
       <footer class="footer">
         <span><a href="mailto:giorgisamu.gs@gmail.com">giorgisamu.gs@gmail.com</a></span>
         <span>Built with Astro.</span>

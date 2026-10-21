@@ -13,9 +13,10 @@ interface Props {
   image?: string;
   alt?: string;
   label?: string;
+  caption?: string;
 }
 
-const { kind = "work", image, alt = "", label = "[Screenshot]" } = Astro.props;
+const { kind = "work", image, alt = "", label = "[Screenshot]", caption } = Astro.props;
 const base = image ? `/img/work/${image}` : null;
 ---
 
@@ -39,4 +40,5 @@ const base = image ? `/img/work/${image}` : null;
       <span>{label}</span>
     )}
   </div>
+  {caption && <figcaption class="figure-caption">{caption}</figcaption>}
 </figure>

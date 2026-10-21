@@ -333,27 +333,32 @@ h1 {
 
 .figure {
   margin-top: var(--line);
-  border: 1px solid var(--rule);
-  background: var(--bg-raised);
 }
 
-/* Heights are whole lines including the frame's two 1px borders. */
-/* One fixed cell: with an auto row, a tall image would grow the row past the
+/* The frame is the box, not the <figure>, so a caption can sit under it.
+   Heights are whole lines, borders included (border-box).
+   One fixed cell: with an auto row, a tall image would grow the row past the
    frame and its height: 100% would resolve to its own natural height. */
 .figure-box {
   display: grid;
   grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: center;
   overflow: hidden;
+  border: 1px solid var(--rule);
+  background: var(--bg-raised);
   color: var(--fg-dim);
 }
 
 .figure-work {
-  height: calc(var(--line) * 21 - 2px);
+  height: calc(var(--line) * 21);
 }
 
 .figure-site {
-  height: calc(var(--line) * 8 - 2px);
+  height: calc(var(--line) * 8);
+}
+
+.figure-caption {
+  color: var(--fg-dim);
 }
 
 .figure-box picture,
@@ -487,7 +492,7 @@ h1 {
 
 .stack-row {
   display: grid;
-  grid-template-columns: 22ch 26ch minmax(0, 1fr);
+  grid-template-columns: 20ch 26ch minmax(0, 1fr);
   column-gap: 2ch;
   padding: 12px 0;
   overflow-wrap: anywhere;
@@ -497,6 +502,62 @@ h1 {
 .stack-head {
   color: var(--fg-dim);
   background-image: linear-gradient(var(--fg-dim), var(--fg-dim));
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: 14ch minmax(0, 1fr);
+  column-gap: 2ch;
+  margin: var(--line) 0 0;
+}
+
+.meta dt {
+  color: var(--fg-dim);
+}
+
+.meta dd {
+  margin: 0;
+}
+
+.decision + .decision {
+  margin-top: calc(var(--line) * 2);
+}
+
+.screens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--line) 2ch;
+  margin-top: var(--line);
+}
+
+.screens .figure {
+  margin-top: 0;
+}
+
+/* Half-width frames at 10 lines keep the ~1.8:1 captures whole. */
+.screens .figure-work {
+  height: calc(var(--line) * 10);
+}
+
+/* Previous/next line above the footer on case-study pages. */
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 2ch;
+  margin-top: calc(var(--line) * 3);
+}
+
+.pager a {
+  color: var(--fg-dim);
+}
+
+.pager a:hover {
+  color: var(--bg);
+}
+
+.pager + .footer {
+  margin-top: var(--line);
 }
 
 /* ---------- Footer ---------- */
@@ -595,7 +656,7 @@ h1 {
   }
 
   .figure-work {
-    height: calc(var(--line) * 10 - 2px);
+    height: calc(var(--line) * 10);
   }
 
   /* Phone frames run from ~1.1:1 to 2.5:1; the phone crop is centred on its
@@ -620,6 +681,14 @@ h1 {
 
   .stack-layer {
     color: var(--fg-dim);
+  }
+
+  .stack-choice {
+    font-weight: 600;
+  }
+
+  .screens {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
