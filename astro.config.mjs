@@ -46,6 +46,9 @@ function cspCheck() {
 
 export default defineConfig({
   site: "https://giorgisamu.info",
+  // Cloudflare serves /work/sites/index.html at /work/sites/ and redirects the
+  // slashless form; matching it here makes a slashless internal link 404 in dev.
+  trailingSlash: "always",
   build: {
     inlineStylesheets: "never",
   },
