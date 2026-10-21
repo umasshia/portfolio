@@ -1,0 +1,42 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  current?: "work" | "sites" | "background" | "contact";
+}
+
+const { title, description, current } = Astro.props;
+const onIndex = Astro.url.pathname === "/";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="data:," />
+    <link rel="preload" href="/fonts/IBMPlexMono-Regular-Latin1.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/IBMPlexMono-SemiBold-Latin1.woff2" as="font" type="font/woff2" crossorigin />
+    {/* Restores a stored skin before first paint. Its SHA-256 is pinned in
+        public/_headers; the build fails if this text changes without it. */}
+    <script is:inline>try{var s=localStorage.getItem("skin");if(s==="screen"||s==="paper")document.documentElement.dataset.skin=s}catch(e){}</script>
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+    <div class="page">
+      <Nav onIndex={onIndex} current={current} />
+      <main id="content" tabindex="-1">
+        <slot />
+      </main>
+      <footer class="footer">
+        <span>[Footer note]</span>
+        <span>Built with Astro.</span>
+      </footer>
+    </div>
+  </body>
+</html>

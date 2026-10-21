@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+
+export function getStaticPaths() {
+  return [{ params: { slug: "ptchwrk" }, props: { name: "Ptchwrk" } }];
+}
+
+const { name } = Astro.props;
+
+const stack = [
+  { layer: "[Layer]", choice: "[Choice]", why: "[Why]" },
+  { layer: "[Layer]", choice: "[Choice]", why: "[Why]" },
+  { layer: "[Layer]", choice: "[Choice]", why: "[Why]" },
+];
+---
+
+<Base title={`${name}, Giorgi Samushia`} description={`${name}: case study placeholder.`} current="work">
+  <nav class="crumb dim" aria-label="Breadcrumb">
+    <a href="/#work">Work</a> / {name}
+  </nav>
+  <h1>{name}</h1>
+
+  <section class="section">
+    <SectionHeading>What it is</SectionHeading>
+    <p class="dim">[What it is: placeholder paragraph]</p>
+  </section>
+
+  <section class="section">
+    <SectionHeading>Try it</SectionHeading>
+    <p class="dim">[Try it: placeholder paragraph]</p>
+  </section>
+
+  <section class="section">
+    <SectionHeading>Stack</SectionHeading>
+    <p class="dim">[Stack: placeholder paragraph]</p>
+    <div class="stack">
+      <div class="stack-row stack-head" aria-hidden="true">
+        <span>Layer</span><span>Choice</span><span>Why</span>
+      </div>
+      {stack.map((row) => (
+        <div class="stack-row">
+          <span class="stack-layer">{row.layer}</span>
+          <span>{row.choice}</span>
+          <span>{row.why}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <SectionHeading>Decisions and tradeoffs</SectionHeading>
+    <p class="dim">[Decisions and tradeoffs: placeholder paragraph]</p>
+  </section>
+
+  <section class="section">
+    <SectionHeading>Screens</SectionHeading>
+    <p class="dim">[Screens: placeholder paragraph]</p>
+  </section>
+</Base>

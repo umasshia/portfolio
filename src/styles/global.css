@@ -1,0 +1,521 @@
+/* One stylesheet for the whole site. Everything sits on a 16px monospace
+   grid: widths in ch, vertical spacing in multiples of --line (24px).
+   Hairlines are drawn with pseudo-elements or background images so they
+   take up no layout space and never knock the rhythm off by a pixel. */
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBMPlexMono-Regular-Latin1.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBMPlexMono-SemiBold-Latin1.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+
+/* Paper is the base so browsers with no color-scheme preference get it. */
+:root {
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --line: 24px;
+
+  --bg: #F2F2EE;
+  --bg-raised: #E7E8E1;
+  --fg: #1C241C;
+  --fg-dim: #4F5B4F;
+  --accent: #1F3FA8;
+  --rule: #D3D6CC;
+  color-scheme: light;
+}
+
+/* Screen is declared twice: once for the OS default (unless the visitor
+   picked Paper), once for an explicit pick. CSS has no way to share the block. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-skin="paper"]) {
+    --bg: #0B0F0B;
+    --bg-raised: #111A12;
+    --fg: #7CE38B;
+    --fg-dim: #4E9A5C;
+    --accent: #FFD27A;
+    --rule: #1E3A24;
+    color-scheme: dark;
+  }
+}
+
+:root[data-skin="screen"] {
+  --bg: #0B0F0B;
+  --bg-raised: #111A12;
+  --fg: #7CE38B;
+  --fg-dim: #4E9A5C;
+  --accent: #FFD27A;
+  --rule: #1E3A24;
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font: 400 16px / var(--line) var(--font-mono);
+  color: var(--fg);
+  background: var(--bg);
+  text-align: left;
+}
+
+h1, h2, h3, p, ul, ol, figure {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1, h2, h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+p {
+  max-width: 72ch;
+}
+
+p + p {
+  margin-top: var(--line);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: var(--fg-dim);
+  text-underline-offset: 4px;
+}
+
+a:hover {
+  background: var(--fg);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.dim {
+  color: var(--fg-dim);
+}
+
+/* ---------- Page column ---------- */
+
+.page {
+  max-width: calc(96ch + 48px);
+  margin: 0 auto;
+  padding: var(--line) 24px;
+}
+
+.skip {
+  position: absolute;
+  left: 24px;
+  top: 0;
+  transform: translateY(-200%);
+  padding: 0 1ch;
+  background: var(--fg);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.skip:focus {
+  transform: none;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* ---------- Nav ---------- */
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--line);
+}
+
+.nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 1px;
+  background: var(--rule);
+}
+
+.nav a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.nav a:hover,
+.nav a[aria-current] {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.nav-name {
+  font-weight: 600;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.nav-links a {
+  display: block;
+  padding: 0 1ch;
+}
+
+/* The 1px box would make the switch 26px tall, so the buttons give up
+   the 2px to keep the row at exactly one line. */
+.skin {
+  display: flex;
+  margin-left: 4ch;
+  border: 1px solid var(--fg-dim);
+}
+
+.skin button {
+  margin: 0;
+  padding: 0 1ch;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  line-height: calc(var(--line) - 2px);
+  color: var(--fg);
+  cursor: pointer;
+}
+
+/* The active button is styled from the <html> state, not aria-pressed, so
+   it is right on first paint and with JavaScript off. */
+:root:not([data-skin]) .skin [data-skin-choice="paper"],
+:root[data-skin="paper"] .skin [data-skin-choice="paper"],
+:root[data-skin="screen"] .skin [data-skin-choice="screen"],
+.skin button:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-skin]) .skin [data-skin-choice="screen"] {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  :root:not([data-skin]) .skin [data-skin-choice="paper"]:not(:hover) {
+    background: transparent;
+    color: var(--fg);
+  }
+}
+
+/* ---------- Header ---------- */
+
+h1 {
+  font-size: 32px;
+  line-height: calc(var(--line) * 2);
+}
+
+/* ---------- Index ---------- */
+
+.index {
+  margin-top: calc(var(--line) * 2);
+}
+
+.index-head,
+.row {
+  display: grid;
+  grid-template-columns: 28ch 6ch minmax(0, 1fr) 24ch;
+  column-gap: 2ch;
+}
+
+.index-head {
+  position: relative;
+  color: var(--fg-dim);
+}
+
+.index-head::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 1px;
+  background: var(--fg-dim);
+}
+
+.index-head-short {
+  display: none;
+}
+
+/* Long values wrap and the row grows by whole lines; nothing truncates. */
+.row {
+  min-height: calc(var(--line) * 2);
+  padding: 12px 0;
+  color: var(--fg);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  background: linear-gradient(var(--rule), var(--rule)) no-repeat bottom / 100% 1px;
+}
+
+.row-name {
+  font-weight: 600;
+}
+
+.row:hover,
+.row:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.row:hover .dim,
+.row:focus-visible .dim {
+  color: var(--bg);
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  margin-top: calc(var(--line) * 3);
+  scroll-margin-top: var(--line);
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 2ch;
+  margin-bottom: var(--line);
+}
+
+.section-heading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ---------- Figure ---------- */
+
+.figure {
+  margin-top: var(--line);
+  border: 1px solid var(--rule);
+  background: var(--bg-raised);
+}
+
+.figure img {
+  width: 100%;
+}
+
+.figure-empty {
+  display: grid;
+  place-items: center;
+  /* 21 lines including the frame's two 1px borders. */
+  height: calc(var(--line) * 21 - 2px);
+  color: var(--fg-dim);
+}
+
+/* ---------- Button ---------- */
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--line) 2ch;
+  margin-top: var(--line);
+}
+
+.button {
+  display: inline-block;
+  margin: 0;
+  padding: 0 2ch;
+  border: 0;
+  border-radius: 0;
+  background: var(--fg);
+  color: var(--bg);
+  font: inherit;
+  font-weight: 600;
+  line-height: calc(var(--line) * 2);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Hover swaps fg and bg, so on the already-reversed button it un-reverses. */
+.button:hover {
+  background: var(--bg);
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--fg);
+}
+
+.button-quiet {
+  background: transparent;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--fg-dim);
+}
+
+.button-quiet:hover {
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: none;
+}
+
+/* ---------- Case study ---------- */
+
+.crumb a {
+  color: var(--fg-dim);
+}
+
+.crumb a:hover {
+  color: var(--bg);
+}
+
+.crumb + h1 {
+  margin-top: var(--line);
+}
+
+.stack {
+  margin-top: var(--line);
+}
+
+.stack-row {
+  display: grid;
+  grid-template-columns: 22ch 26ch minmax(0, 1fr);
+  column-gap: 2ch;
+  padding: 12px 0;
+  overflow-wrap: anywhere;
+  background: linear-gradient(var(--rule), var(--rule)) no-repeat bottom / 100% 1px;
+}
+
+.stack-head {
+  color: var(--fg-dim);
+  background-image: linear-gradient(var(--fg-dim), var(--fg-dim));
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 2ch;
+  margin-top: calc(var(--line) * 3);
+  padding-top: var(--line);
+  color: var(--fg-dim);
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* ---------- Phone ---------- */
+
+@media (max-width: 640px) {
+  .nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name skin"
+      "links links";
+  }
+
+  .nav-name {
+    grid-area: name;
+    justify-self: start;
+  }
+
+  .skin {
+    grid-area: skin;
+    margin-left: 2ch;
+  }
+
+  /* Pull the first link's 1ch padding into the gutter so its text lines
+     up with the name above it. */
+  .nav-links {
+    grid-area: links;
+    margin-left: -1ch;
+  }
+
+  /* 36px is off the 24px grid; 12px of padding puts the next line back on
+     it. Padding, not margin, so it can't collapse into a section's margin. */
+  h1 {
+    font-size: 24px;
+    line-height: 36px;
+    padding-bottom: 12px;
+  }
+
+  .index-head-full {
+    display: none;
+  }
+
+  .index-head-short {
+    display: block;
+  }
+
+  .index-head {
+    grid-template-columns: 1fr;
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "name year"
+      "desc desc";
+  }
+
+  .row-name { grid-area: name; }
+  .row-year { grid-area: year; }
+  .row-desc { grid-area: desc; }
+  .row-where { display: none; }
+
+  .stack-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .stack-head {
+    display: none;
+  }
+
+  .stack-layer {
+    color: var(--fg-dim);
+  }
+}

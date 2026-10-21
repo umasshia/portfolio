@@ -1,0 +1,21 @@
+---
+// A screenshot frame. Without `src` it renders an empty placeholder frame
+// (504px, 21 lines) labelled in dim text.
+interface Props {
+  src?: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  label?: string;
+}
+
+const { src, alt = "", width, height, label = "[Screenshot]" } = Astro.props;
+---
+
+<figure class="figure">
+  {src ? (
+    <img src={src} alt={alt} width={width} height={height} />
+  ) : (
+    <div class="figure-empty">{label}</div>
+  )}
+</figure>

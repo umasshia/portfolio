@@ -1,0 +1,73 @@
+---
+import Base from "../layouts/Base.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import IndexRow from "../components/IndexRow.astro";
+import Figure from "../components/Figure.astro";
+import Button from "../components/Button.astro";
+
+// Placeholder rows. The third one is deliberately long to prove the first
+// and last columns wrap instead of truncating.
+const rows = [
+  { href: "#work", name: "[Project]", year: "[Year]", description: "[What it is]", where: "[Where]" },
+  { href: "#work", name: "[Project]", year: "[Year]", description: "[What it is]", where: "[Where]" },
+  {
+    href: "#sites",
+    name: "[A long placeholder name that has to wrap]",
+    year: "[Year]",
+    description: "[A longer placeholder description, long enough to wrap onto a second line at desktop width]",
+    where: "[a-long-placeholder-domain.example]",
+  },
+  { href: "#sites", name: "[Site]", year: "[Year]", description: "[What it is]", where: "[Where]" },
+  { href: "#sites", name: "[Site]", year: "[Year]", description: "[What it is]", where: "[Where]" },
+  { href: "#background", name: "[Background]", year: "[Year]", description: "[What it is]", where: "[Where]" },
+  { href: "#contact", name: "[Contact]", year: "", description: "[What it is]", where: "[Where]" },
+];
+---
+
+<Base
+  title="Giorgi Samushia"
+  description="Giorgi Samushia. Full-stack developer. MEng Computer Science at Cornell Tech, New York."
+>
+  <header>
+    <h1>Giorgi Samushia</h1>
+    <p>Full-stack developer. MEng Computer Science at Cornell Tech, New York.</p>
+    <p class="dim">[Intro]</p>
+  </header>
+
+  <nav class="index" aria-label="On this page">
+    <div class="index-head">
+      <span class="index-head-short">On this page</span>
+      <span class="index-head-full" aria-hidden="true">Name</span>
+      <span class="index-head-full" aria-hidden="true">Year</span>
+      <span class="index-head-full" aria-hidden="true">What it is</span>
+      <span class="index-head-full" aria-hidden="true">Where</span>
+    </div>
+    {rows.map((row) => <IndexRow {...row} />)}
+  </nav>
+
+  <section class="section" id="work">
+    <SectionHeading>Work</SectionHeading>
+    <p class="dim">[Work: placeholder paragraph]</p>
+    <Figure label="[Screenshot 1]" />
+    <Figure label="[Screenshot 2]" />
+  </section>
+
+  <section class="section" id="sites">
+    <SectionHeading>Sites</SectionHeading>
+    <p class="dim">[Sites: placeholder paragraph]</p>
+  </section>
+
+  <section class="section" id="background">
+    <SectionHeading>Background</SectionHeading>
+    <p class="dim">[Background: placeholder paragraph]</p>
+  </section>
+
+  <section class="section" id="contact">
+    <SectionHeading>Contact</SectionHeading>
+    <p class="dim">[Contact: placeholder paragraph]</p>
+    <div class="buttons">
+      <Button href="#contact">[Primary button]</Button>
+      <Button href="#contact" quiet>[Quiet button]</Button>
+    </div>
+  </section>
+</Base>

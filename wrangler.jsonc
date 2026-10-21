@@ -1,0 +1,9 @@
+// Static site on Cloudflare Workers (static assets only, no Worker code).
+// public/_headers is copied into dist/ and applied by Cloudflare.
+{
+  "name": "giorgisamu-info",
+  "compatibility_date": "2026-10-20",
+  "assets": {
+    "directory": "./dist"
+  }
+}

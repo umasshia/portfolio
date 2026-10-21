@@ -1,0 +1,78 @@
+---
+interface Props {
+  onIndex: boolean;
+  current?: "work" | "sites" | "background" | "contact";
+}
+
+const { onIndex, current } = Astro.props;
+
+const links = [
+  { id: "work", label: "Work" },
+  { id: "sites", label: "Sites" },
+  { id: "background", label: "Background" },
+  { id: "contact", label: "Contact" },
+] as const;
+
+// In-page anchors on the index, absolute links everywhere else.
+const base = onIndex ? "" : "/";
+---
+
+<nav class="nav" aria-label="Main">
+  <a class="nav-name" href={onIndex ? "#top" : "/"}>Giorgi Samushia</a>
+  <ul class="nav-links">
+    {links.map((link) => (
+      <li>
+        <a href={`${base}#${link.id}`} aria-current={link.id === current ? "true" : undefined}>
+          {link.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+  <div class="skin" role="group" aria-label="Color skin">
+    <button type="button" data-skin-choice="screen">Screen</button>
+    <button type="button" data-skin-choice="paper">Paper</button>
+  </div>
+</nav>
+
+<script>
+  const KEY = "skin";
+  const root = document.documentElement;
+  const dark = matchMedia("(prefers-color-scheme: dark)");
+  const buttons = document.querySelectorAll<HTMLButtonElement>("[data-skin-choice]");
+
+  type Skin = "screen" | "paper";
+
+  // Only these two literal values ever reach the DOM, whatever is in storage.
+  function asSkin(value: string | undefined): Skin | null {
+    return value === "screen" || value === "paper" ? value : null;
+  }
+
+  function activeSkin(): Skin {
+    return asSkin(root.dataset.skin) ?? (dark.matches ? "screen" : "paper");
+  }
+
+  // Visual state comes from CSS; this keeps aria-pressed in step for screen readers.
+  function syncPressed() {
+    const active = activeSkin();
+    for (const button of buttons) {
+      button.setAttribute("aria-pressed", String(button.dataset.skinChoice === active));
+    }
+  }
+
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      const skin = asSkin(button.dataset.skinChoice);
+      if (!skin) return;
+      root.dataset.skin = skin;
+      try {
+        localStorage.setItem(KEY, skin);
+      } catch {
+        // Storage blocked (private mode, policy): the switch still works for this page.
+      }
+      syncPressed();
+    });
+  }
+
+  dark.addEventListener("change", syncPressed);
+  syncPressed();
+</script>

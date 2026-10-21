@@ -1,0 +1,18 @@
+---
+interface Props {
+  href: string;
+  name: string;
+  year: string;
+  description: string;
+  where: string;
+}
+
+const { href, name, year, description, where } = Astro.props;
+---
+
+<a class="row" href={href}>
+  <span class="row-name">{name}</span>
+  <span class="row-year dim">{year}</span>
+  <span class="row-desc">{description}</span>
+  <span class="row-where dim">{where}</span>
+</a>
