@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AiOutlineRight, AiOutlineMail, AiOutlineGithub, AiOutlineDown, AiOutlineLinkedin } from "react-icons/ai";
-import { HiOutlineDocumentDownload } from "react-icons/hi"
 import yml from '../../icons/yml.png';
 import java from '../../icons/java.png';
 import cpp from '../../icons/cpp.png';
@@ -141,9 +140,6 @@ const Navbar = () => {
                 </a>
                 <a target="_blank" rel="noopener noreferrer" href="mailto:giorgisamu.gs@gmail.com" title="Contact Me">
                 <AiOutlineMail className="nav-btn mail"/>
-                </a>
-                <a target="_blank" rel="noopener noreferrer" href={require("../../docs/Resume.pdf")} title="Download My Resume" download>
-                <HiOutlineDocumentDownload className="nav-btn download"/>
                 </a>
             </div>
         {navExpanded && renderNavSections()}
