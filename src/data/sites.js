@@ -18,7 +18,7 @@ export const sites = [
     anchor: "the-bushwick",
     year: "2026",
     summary: "Dispensary website, Bushwick",
-    alt: "The Bushwick homepage: the graffiti-style title The Bushwick Dispensary, two deals and an Order Now button.",
+    alt: "The Bushwick homepage: the graffiti-style title The Bushwick Dispensary and an Order Now button over a video still of an L train pulling into Halsey Street station.",
     line: "Site for a dispensary in Bushwick, with online ordering.",
     stack: "Next.js 16 on Cloudflare Workers, with a live menu from the store's Flowhub point of sale and pickup and delivery orders sent to Flowhub.",
     href: "https://thebushwicknyc.com",

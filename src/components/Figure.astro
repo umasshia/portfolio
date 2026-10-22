@@ -4,10 +4,10 @@
 // object-fit: cover, anchored top left. Without `image` it shows a dim label.
 //
 // kind "work": 21 lines (10 on phones). kind "site": 8 lines, or the work
-// heights when `wide` (full column; only the 680px file is offered so a 1x
-// screen doesn't pick the 340px one).
+// heights when `wide` (the full 922px column on /work/sites/).
 // `image` is the base name of files in public/img/work/:
-//   site: <image>-340x190.{avif,webp} (1x) and <image>-680x380.{avif,webp} (2x)
+//   site: <image>-340x190.{avif,webp} (1x) and <image>-680x380.{avif,webp} (2x);
+//         wide: <image>-922x504 (1x) and <image>-1844x1008 (2x)
 //   work: <image>-920x502 (1x) and <image>-1840x1004 (2x), plus a separate
 //         phone crop <image>-680x476 centred on the subject (art direction)
 interface Props {
@@ -27,8 +27,9 @@ const base = image ? `/img/work/${image}` : null;
   <div class={`figure-box figure-${kind}${wide ? " figure-wide" : ""}`}>
     {base && kind === "site" && wide ? (
       <picture>
-        <source type="image/avif" srcset={`${base}-680x380.avif`} />
-        <img src={`${base}-680x380.webp`} width="680" height="380" alt={alt} loading="lazy" decoding="async" />
+        <source type="image/avif" srcset={`${base}-922x504.avif 1x, ${base}-1844x1008.avif 2x`} />
+        <source type="image/webp" srcset={`${base}-922x504.webp 1x, ${base}-1844x1008.webp 2x`} />
+        <img src={`${base}-1844x1008.webp`} width="1844" height="1008" alt={alt} loading="lazy" decoding="async" />
       </picture>
     ) : base && kind === "site" ? (
       <picture>
